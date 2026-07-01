@@ -89,7 +89,7 @@ export default function SliderBuilderClient({ slider, items }: { slider: Slider 
           </div>
         ))}
         {!orderedItems.length && (
-          <p className="text-center text-gray-400 py-10">لا توجد شرائح بعد. اضغط "شريحة جديدة" للبدء.</p>
+          <p className="text-center text-gray-400 py-10">لا توجد شرائح بعد. اضغط &quot;شريحة جديدة&quot; للبدء.</p>
         )}
       </div>
 

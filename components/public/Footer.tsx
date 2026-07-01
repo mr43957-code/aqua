@@ -17,8 +17,8 @@ export default async function Footer() {
     { url: settings.social_linkedin, icon: Linkedin },
   ].filter((s) => s.url);
 
-  const links = footerLinks.length
-    ? footerLinks.map((m: any) => ({ href: m.url, label: m.label }))
+  const links: { href: string; label: string }[] = footerLinks.length
+    ? footerLinks.map((m: { url: string; label: string }) => ({ href: m.url, label: m.label }))
     : [
         { href: '/services', label: 'الخدمات' },
         { href: '/products', label: 'المتجر' },

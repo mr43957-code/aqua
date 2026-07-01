@@ -11,7 +11,7 @@ export interface Column<T> {
   className?: string;
 }
 
-interface DataTableProps<T> {
+interface DataTableProps<T extends object> {
   data: T[];
   columns: Column<T>[];
   keyField?: keyof T;
@@ -22,9 +22,12 @@ interface DataTableProps<T> {
   pageSize?: number;
 }
 
-export default function DataTable<T extends Record<string, unknown>>({
-  data, columns, keyField = 'id' as keyof T,
-  searchable = true, searchFields = [],
+export default function DataTable<T extends object>({
+  data,
+  columns,
+  keyField = 'id' as keyof T,
+  searchable = true,
+  searchFields = [],
   emptyMessage = 'لا توجد بيانات',
   loading = false,
   pageSize = 10,
@@ -32,16 +35,25 @@ export default function DataTable<T extends Record<string, unknown>>({
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
 
-  const filtered = searchable && search
-    ? data.filter((row) =>
-        searchFields.some((field) =>
-          String(row[field] ?? '').toLowerCase().includes(search.toLowerCase())
+  const filtered =
+    searchable && search
+      ? data.filter((row) =>
+          searchFields.some((field) =>
+            String((row as Record<keyof T, unknown>)[field] ?? '')
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          )
         )
-      )
-    : data;
+      : data;
 
   const totalPages = Math.ceil(filtered.length / pageSize);
   const paginated = filtered.slice(page * pageSize, (page + 1) * pageSize);
+
+  const getKey = (row: T): string =>
+    String((row as Record<keyof T, unknown>)[keyField] ?? Math.random());
+
+  const getCellValue = (row: T, key: string): string =>
+    String((row as Record<string, unknown>)[key] ?? '—');
 
   return (
     <div className="space-y-3">
@@ -62,7 +74,10 @@ export default function DataTable<T extends Record<string, unknown>>({
           <thead className="bg-gray-50 border-b border-gray-100">
             <tr>
               {columns.map((col) => (
-                <th key={col.key} className={clsx('px-4 py-3 text-right font-medium text-gray-600', col.className)}>
+                <th
+                  key={col.key}
+                  className={clsx('px-4 py-3 text-right font-medium text-gray-600', col.className)}
+                >
                   {col.label}
                 </th>
               ))}
@@ -87,10 +102,10 @@ export default function DataTable<T extends Record<string, unknown>>({
               </tr>
             ) : (
               paginated.map((row) => (
-                <tr key={String(row[keyField])} className="hover:bg-gray-50 transition-colors">
+                <tr key={getKey(row)} className="hover:bg-gray-50 transition-colors">
                   {columns.map((col) => (
                     <td key={col.key} className={clsx('px-4 py-3 text-gray-700', col.className)}>
-                      {col.render ? col.render(row) : String(row[col.key as keyof T] ?? '—')}
+                      {col.render ? col.render(row) : getCellValue(row, col.key)}
                     </td>
                   ))}
                 </tr>
@@ -102,13 +117,26 @@ export default function DataTable<T extends Record<string, unknown>>({
 
       {totalPages > 1 && (
         <div className="flex items-center justify-between text-sm text-gray-500">
-          <span>عرض {page * pageSize + 1}–{Math.min((page + 1) * pageSize, filtered.length)} من {filtered.length}</span>
+          <span>
+            عرض {page * pageSize + 1}–{Math.min((page + 1) * pageSize, filtered.length)} من{' '}
+            {filtered.length}
+          </span>
           <div className="flex items-center gap-2">
-            <button onClick={() => setPage((p) => p - 1)} disabled={page === 0} className="p-1 rounded hover:bg-gray-100 disabled:opacity-40">
+            <button
+              onClick={() => setPage((p) => p - 1)}
+              disabled={page === 0}
+              className="p-1 rounded hover:bg-gray-100 disabled:opacity-40"
+            >
               <ChevronRight className="w-4 h-4" />
             </button>
-            <span>{page + 1} / {totalPages}</span>
-            <button onClick={() => setPage((p) => p + 1)} disabled={page >= totalPages - 1} className="p-1 rounded hover:bg-gray-100 disabled:opacity-40">
+            <span>
+              {page + 1} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={page >= totalPages - 1}
+              className="p-1 rounded hover:bg-gray-100 disabled:opacity-40"
+            >
               <ChevronLeft className="w-4 h-4" />
             </button>
           </div>

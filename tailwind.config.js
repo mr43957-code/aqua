@@ -4,7 +4,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: { sans: ['var(--font-cairo)', 'sans-serif'] },
+      fontFamily: { sans: ['Cairo', 'sans-serif'] },
       colors: {
         primary: {
           50: '#eefbff', 100: '#d6f3ff', 200: '#b0e9ff', 300: '#7adcff',

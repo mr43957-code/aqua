@@ -14,11 +14,15 @@ export default function RealtimeListener() {
     const supabase = createClient();
     const channel = supabase
       .channel('orders-realtime')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, (payload) => {
-        audioRef.current?.play().catch(() => {});
-        toast.success(`طلب جديد من ${payload.new.customer_name}`);
-        router.refresh();
-      })
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'orders' },
+        (payload: { new: Record<string, unknown> }) => {
+          audioRef.current?.play().catch(() => {});
+          toast.success(`طلب جديد من ${String(payload.new.customer_name ?? '')}`);
+          router.refresh();
+        }
+      )
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };

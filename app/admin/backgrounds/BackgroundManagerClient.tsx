@@ -89,7 +89,9 @@ function BackgroundEditModal({
 }: { background: PageBackground; mediaLibrary: Media[]; onClose: () => void }) {
   const [isPending, startTransition] = useTransition();
   const [filePath, setFilePath] = useState(background.file_path ?? '');
-  const [fileType, setFileType] = useState(background.file_type ?? 'image');
+  const [fileType, setFileType] = useState<'image' | 'video'>(
+    (background.file_type as 'image' | 'video') ?? 'image'
+  );
   const [overlayOpacity, setOverlayOpacity] = useState(background.overlay_opacity ?? 0.4);
   const [blur, setBlur] = useState(background.blur_amount ?? 0);
   const [brightness, setBrightness] = useState(background.brightness ?? 1);
@@ -121,7 +123,7 @@ function BackgroundEditModal({
               اختيار من مكتبة الوسائط
             </Button>
             <FormField label="نوع الملف">
-              <Select value={fileType} onChange={(e) => setFileType(e.target.value)}>
+              <Select value={fileType} onChange={(e) => setFileType(e.target.value as 'image' | 'video')}>
                 <option value="image">صورة</option>
                 <option value="video">فيديو</option>
               </Select>
