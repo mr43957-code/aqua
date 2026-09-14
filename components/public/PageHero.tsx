@@ -17,9 +17,9 @@ export default function PageHero({
       {/* توهج خلفي */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top,_white_0%,_transparent_50%)]" />
       <div className="relative z-10 max-w-3xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3 animate-fade-in">{title}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-3 animate-fade-zoom">{title}</h1>
         {subtitle && (
-          <p className="text-primary-200 text-base md:text-lg leading-relaxed animate-fade-in">{subtitle}</p>
+          <p className="text-primary-200 text-base md:text-lg leading-relaxed animate-fade-zoom" style={{ animationDelay: '0.15s' }}>{subtitle}</p>
         )}
       </div>
       {/* شريط موجي أسفل الترويسة */}

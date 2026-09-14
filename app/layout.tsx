@@ -4,6 +4,8 @@ import './globals.css';
 import { createClient } from '@/lib/supabase/server';
 import { Toaster } from 'sonner';
 import ThemeInjector from '@/components/public/ThemeInjector';
+import GlobalBackground from '@/components/public/GlobalBackground';
+import PageTransition from '@/components/public/PageTransition';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -18,13 +20,13 @@ export async function generateMetadata(): Promise<Metadata> {
     );
     return {
       metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'),
-      title: { default: s.seo_default_title || s.site_name || 'أكواتك', template: `%s | ${s.site_name || 'أكواتك'}` },
+      title: { default: s.seo_default_title || s.site_name || 'أكوا فيجن', template: `%s | ${s.site_name || 'أكوا فيجن'}` },
       description: s.seo_default_description || '',
       icons: s.site_favicon_url ? [{ url: s.site_favicon_url }] : undefined,
-      openGraph: { type: 'website', locale: 'ar_EG', siteName: s.site_name || 'أكواتك' },
+      openGraph: { type: 'website', locale: 'ar_EG', siteName: s.site_name || 'أكوا فيجن' },
     };
   } catch {
-    return { title: 'أكواتك', description: 'متخصصون في حمامات السباحة وشبكات المياه' };
+    return { title: 'أكوا فيجن', description: 'متخصصون في حمامات السباحة وشبكات المياه' };
   }
 }
 
@@ -42,7 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ fontFamily: "'Cairo', sans-serif", margin: 0 }}>
         {/* ThemeInjector في أول body — يُطبَّق على كل عناصر الموقع */}
         <ThemeInjector />
-        {children}
+        {/* خلفية الموقع العامة بتأثير بلور */}
+        <GlobalBackground />
+        {/* انتقال الصفحات بحركة سلسة */}
+        <PageTransition>{children}</PageTransition>
         <Toaster richColors position="top-center" />
       </body>
     </html>

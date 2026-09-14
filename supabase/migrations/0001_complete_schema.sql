@@ -506,7 +506,7 @@ create index if not exists idx_site_settings_key on public.site_settings(key);
 
 -- Default site settings
 insert into public.site_settings (key, value, category, label, type) values
-  ('site_name', 'أكواتك', 'general', 'اسم الموقع', 'text'),
+  ('site_name', 'أكوا فيجن', 'general', 'اسم الموقع', 'text'),
   ('site_tagline', 'متخصصون في حمامات السباحة وشبكات المياه', 'general', 'الشعار الفرعي', 'text'),
   ('site_description', 'نقدم خدمات إنشاء وصيانة حمامات السباحة وشبكات المياه بأعلى معايير الجودة', 'general', 'وصف الموقع', 'textarea'),
   ('site_logo_url', '', 'general', 'شعار الموقع', 'image'),
@@ -524,9 +524,9 @@ insert into public.site_settings (key, value, category, label, type) values
   ('social_tiktok', '', 'social', 'تيكتوك', 'url'),
   ('header_announcement', '', 'header', 'إعلان الهيدر', 'text'),
   ('header_announcement_active', 'false', 'header', 'تفعيل الإعلان', 'boolean'),
-  ('footer_copyright', '© 2024 أكواتك. جميع الحقوق محفوظة.', 'footer', 'نص حقوق النشر', 'text'),
+  ('footer_copyright', '© 2024 أكوا فيجن. جميع الحقوق محفوظة.', 'footer', 'نص حقوق النشر', 'text'),
   ('footer_about_text', 'متخصصون في إنشاء وصيانة حمامات السباحة وشبكات المياه.', 'footer', 'نص من نحن في الفوتر', 'textarea'),
-  ('seo_default_title', 'أكواتك | حمامات السباحة وشبكات المياه', 'seo', 'عنوان SEO الافتراضي', 'text'),
+  ('seo_default_title', 'أكوا فيجن | حمامات السباحة وشبكات المياه', 'seo', 'عنوان SEO الافتراضي', 'text'),
   ('seo_default_description', 'نقدم خدمات إنشاء وصيانة حمامات السباحة وشبكات المياه بأعلى معايير الجودة.', 'seo', 'وصف SEO الافتراضي', 'textarea'),
   ('google_analytics_id', '', 'advanced', 'Google Analytics ID', 'text'),
   ('tawkto_property_id', '', 'advanced', 'Tawk.to Property ID', 'text'),
@@ -553,7 +553,8 @@ insert into public.page_backgrounds (page_key, page_label) values
   ('blog', 'المدونة'),
   ('contact', 'اتصل بنا'),
   ('faq', 'الأسئلة الشائعة'),
-  ('quote', 'طلب عرض سعر')
+  ('quote', 'طلب عرض سعر'),
+  ('global', 'خلفية عامة (كامل الموقع)')
 on conflict (page_key) do nothing;
 
 -- Default stats

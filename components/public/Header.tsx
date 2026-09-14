@@ -31,7 +31,7 @@ export default async function Header() {
       ];
 
   const logoUrl = settings.site_logo_url;
-  const siteName = settings.site_name ?? 'أكواتك';
+  const siteName = settings.site_name ?? 'أكوا فيجن';
   const phone = settings.contact_phone;
 
   return (

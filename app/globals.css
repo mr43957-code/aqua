@@ -58,6 +58,83 @@ html { scroll-behavior: smooth; }
 }
 .animate-fab-pulse { animation: fab-pulse 2.2s ease-out infinite; }
 
+/* ====== انتقالات وحركات احترافية ====== */
+
+/* انتقال الدخول للصفحة (تستخدم في PageTransition) */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page-in {
+  animation: page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ظهور العناصر عند التمرير (Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ظهور من اليسار */
+.reveal-left {
+  transform: translateX(-32px);
+}
+.reveal-left.revealed {
+  transform: translateX(0);
+}
+
+/* ظهور من اليمين */
+.reveal-right {
+  transform: translateX(32px);
+}
+.reveal-right.revealed {
+  transform: translateX(0);
+}
+
+/* ظهور بحركة تكبير ناعمة */
+.reveal-zoom {
+  transform: scale(0.92);
+}
+.reveal-zoom.revealed {
+  transform: scale(1);
+}
+
+/* تحويم/طفو للأيقونات */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float-y 3s ease-in-out infinite; }
+
+/* دخول تدريجي متتابع */
+@keyframes fade-zoom-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-zoom { animation: fade-zoom-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* نبض ضوء على الشعار/الأزرار البارزة */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0); }
+  50% { box-shadow: 0 0 24px 4px rgba(244, 114, 182, 0.35); }
+}
+.animate-glow { animation: glow-pulse 2.4s ease-in-out infinite; }
+
+/* قلب ثلاثي الأبعاد هادئ لبطاقات المعرض */
+@keyframes card-tilt {
+  0%, 100% { transform: translateY(0) rotateX(0); }
+  50% { transform: translateY(-4px); }
+}
+.hover-card-tilt { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s; }
+.hover-card-tilt:hover { transform: translateY(-6px) scale(1.015); }
+
 @keyframes bg-zoom {
   0% { transform: scale(1); }
   100% { transform: scale(1.1); }

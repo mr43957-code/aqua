@@ -51,7 +51,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     '@type': 'Service',
     name: service.title,
     description: service.description,
-    provider: { '@type': 'Organization', name: 'أكواتك' },
+    provider: { '@type': 'Organization', name: 'أكوا فيجن' },
   };
 
   return (

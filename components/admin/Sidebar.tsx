@@ -90,7 +90,7 @@ export default function Sidebar({
         </div>
         {!collapsed && (
           <div className="overflow-hidden">
-            <p className="text-white font-bold text-sm truncate">{siteSettings?.site_name ?? 'أكواتك CMS'}</p>
+            <p className="text-white font-bold text-sm truncate">{siteSettings?.site_name ?? 'أكوا فيجن'}</p>
             <p className="text-primary-200 text-xs">لوحة التحكم</p>
           </div>
         )}

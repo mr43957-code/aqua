@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
           <div className="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-primary-900/50 ring-1 ring-white/20">
             <Waves className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-xl font-bold text-white">لوحة تحكم أكواتك</h1>
+          <h1 className="text-xl font-bold text-white">لوحة تحكم أكوا فيجن</h1>
           <p className="text-primary-300 text-sm mt-1">سجّل الدخول لإدارة موقعك</p>
         </div>
 
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="text-center text-primary-300/70 text-xs mt-6">
-          © {new Date().getFullYear()} أكواتك CMS — جميع الحقوق محفوظة
+          © {new Date().getFullYear()} أكوا فيجن — جميع الحقوق محفوظة
         </p>
       </div>
     </main>

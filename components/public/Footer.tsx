@@ -35,7 +35,7 @@ export default async function Footer() {
     { url: settings.social_linkedin,  icon: Linkedin,  label: 'لينكدإن' },
   ].filter((s) => s.url);
 
-  const siteName  = settings.site_name  ?? 'أكواتك';
+  const siteName  = settings.site_name  ?? 'أكوا فيجن';
   const logoUrl   = settings.site_logo_url;
   const aboutText = settings.footer_about_text ?? settings.site_description ?? '';
   const copyright = settings.footer_copyright ?? `© ${new Date().getFullYear()} ${siteName}. جميع الحقوق محفوظة.`;
