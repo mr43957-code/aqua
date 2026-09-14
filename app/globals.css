@@ -147,13 +147,14 @@ html { scroll-behavior: smooth; }
 }
 .bg-animate-pan { animation: bg-pan 20s linear infinite alternate; }
 
-/* ماركي الشركاء */
+/* ماركي الشركاء — حركة أفقية انسيابية لا تنقطع */
 @keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
+  100% { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
 }
 .animate-marquee:hover {
   animation-play-state: paused;
