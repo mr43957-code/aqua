@@ -61,7 +61,7 @@ export default async function Footer() {
                       <div className="flex gap-2 flex-wrap">
                         {socialLinks.map((s, i) => (
                           <a key={i} href={s.url ?? '#'} target="_blank" rel="noopener noreferrer"
-className="w-10 h-10 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 hover:to-primary-700 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 hover:to-primary-700 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
                             aria-label={s.label}>
                             <s.icon className="w-4 h-4" />
                           </a>

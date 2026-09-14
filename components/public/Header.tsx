@@ -51,8 +51,8 @@ export default async function Header() {
               <Image
                 src={logoUrl}
                 alt={siteName}
-                width={40}
-                height={40}
+                width={44}
+                height={44}
                 className="object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
                 unoptimized
               />
