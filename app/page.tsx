@@ -109,8 +109,8 @@ export default async function HomePage() {
         {/* ===== الخدمات ===== */}
         <section className="max-w-6xl mx-auto px-4 py-16">
           <div className="text-center mb-12">
-            <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">ما نقدمه</span>
-            <h2 className="text-3xl font-bold text-gray-900 mt-1 mb-2">خدماتنا المتميزة</h2>
+            <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">ما نقدمه</span>
+            <h2 className="text-3xl font-bold text-gray-900 mt-3 mb-2">خدماتنا المتميزة</h2>
             <p className="text-gray-500 max-w-xl mx-auto">نقدم حلولاً متكاملة في مجال حمامات السباحة وشبكات المياه بأعلى معايير الجودة</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -147,8 +147,8 @@ export default async function HomePage() {
           <section className="bg-gray-50 py-16 px-4 border-y">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-10">
-                <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">منتجاتنا</span>
-                <h2 className="text-3xl font-bold text-gray-900 mt-1 mb-2">منتجات مميزة مختارة</h2>
+                <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">منتجاتنا</span>
+                <h2 className="text-3xl font-bold text-gray-900 mt-3 mb-2">منتجات مميزة مختارة</h2>
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
                 {featuredProds.map((p: any) => (
@@ -185,8 +185,8 @@ export default async function HomePage() {
         {projects.length > 0 && (
           <section className="max-w-6xl mx-auto px-4 py-16">
             <div className="text-center mb-10">
-              <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">أعمالنا</span>
-              <h2 className="text-3xl font-bold text-gray-900 mt-1 mb-2">أحدث مشاريعنا</h2>
+              <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">أعمالنا</span>
+              <h2 className="text-3xl font-bold text-gray-900 mt-3 mb-2">أحدث مشاريعنا</h2>
               <p className="text-gray-500">نماذج من أعمالنا المنجزة بكل احترافية وجودة عالية</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -221,23 +221,25 @@ export default async function HomePage() {
         )}
 
         {/* ===== لماذا تختارنا ===== */}
-        <section className="bg-primary-800 text-white py-16 px-4">
-          <div className="max-w-6xl mx-auto">
+        <section className="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white py-16 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_white_0%,_transparent_45%)]" />
+          <div className="max-w-6xl mx-auto relative">
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold mb-2">لماذا تختارنا؟</h2>
+              <span className="inline-flex items-center gap-2 bg-white/10 text-primary-100 text-sm font-semibold px-4 py-1.5 rounded-full ring-1 ring-white/20">مميزاتنا</span>
+              <h2 className="text-3xl font-bold mt-3 mb-2">لماذا تختارنا؟</h2>
               <p className="text-primary-200">نتميز عن غيرنا بعدة مزايا تجعلنا الخيار الأفضل</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
               {[
                 { icon: '🏆', title: 'خبرة 10+ سنوات', desc: 'في مجال حمامات السباحة وشبكات المياه' },
                 { icon: '✅', title: 'جودة مضمونة', desc: 'نستخدم أفضل المواد والمعدات الحديثة' },
                 { icon: '⚡', title: 'تنفيذ سريع', desc: 'نلتزم بالمواعيد المحددة دون تأخير' },
                 { icon: '🔧', title: 'صيانة دورية', desc: 'خدمة ما بعد البيع وعقود الصيانة' },
               ].map((f, i) => (
-                <div key={i} className="text-center bg-white/10 rounded-2xl p-5 hover:bg-white/20 transition">
+                <div key={i} className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 border border-white/10">
                   <div className="text-4xl mb-3">{f.icon}</div>
                   <h3 className="font-bold text-white mb-1">{f.title}</h3>
-                  <p className="text-primary-200 text-sm">{f.desc}</p>
+                  <p className="text-primary-200 text-sm leading-relaxed">{f.desc}</p>
                 </div>
               ))}
             </div>
@@ -249,8 +251,8 @@ export default async function HomePage() {
           <section className="bg-gray-50 py-16 px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-10">
-                <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">عملاؤنا</span>
-                <h2 className="text-3xl font-bold text-gray-900 mt-1 mb-2">ماذا يقول عملاؤنا</h2>
+                <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">عملاؤنا</span>
+                <h2 className="text-3xl font-bold text-gray-900 mt-3 mb-2">ماذا يقول عملاؤنا</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {testimonials.map((t: any) => (
@@ -287,7 +289,8 @@ export default async function HomePage() {
         {faqs.length > 0 && (
           <section className="max-w-3xl mx-auto px-4 py-16">
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">الأسئلة الشائعة</h2>
+              <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">الأسئلة الشائعة</span>
+              <h2 className="text-3xl font-bold text-gray-900 mt-3 mb-2">الأسئلة الشائعة</h2>
               <p className="text-gray-500">إجابات على أكثر الأسئلة شيوعاً</p>
             </div>
             <div className="space-y-3">

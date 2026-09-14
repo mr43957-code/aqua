@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import ContactForm from './ContactForm';
 import { createClient } from '@/lib/supabase/server';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
@@ -21,14 +21,7 @@ export default async function ContactPage() {
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'اتصل بنا' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="contact" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">اتصل بنا</h1>
-          <p className="text-primary-200">نحن هنا للإجابة عن أسئلتك والمساعدة في مشاريعك</p>
-        </div>
-      </section>
+      <PageHero title="اتصل بنا" subtitle="نحن هنا للإجابة عن أسئلتك والمساعدة في مشاريعك" pageKey="contact" />
 
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">

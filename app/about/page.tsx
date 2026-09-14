@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { createClient } from '@/lib/supabase/server';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import { CheckCircle, Target, Eye, Users } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'من نحن' };
@@ -27,16 +27,7 @@ export default async function AboutPage() {
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'من نحن' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="about" />
-        <div className="relative z-10 max-w-3xl mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-3">من نحن</h1>
-          <p className="text-primary-200 text-lg">
-            {settings.site_description || 'نتميز بخبرة طويلة وفريق متخصص يضمن لك أفضل نتيجة'}
-          </p>
-        </div>
-      </section>
+      <PageHero title="من نحن" subtitle={settings.site_description || 'نتميز بخبرة طويلة وفريق متخصص يضمن لك أفضل نتيجة'} pageKey="about" />
 
       {/* القصة */}
       <section className="max-w-5xl mx-auto px-4 py-16">

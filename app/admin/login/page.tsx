@@ -57,11 +57,15 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-900 to-primary-950 px-4" dir="rtl">
-      <div className="w-full max-w-sm">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-900 via-primary-800 to-primary-950 px-4 relative overflow-hidden" dir="rtl">
+      {/* زخارف خلفية */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl" />
+
+      <div className="w-full max-w-sm relative z-10">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Waves className="w-7 h-7 text-white" />
+          <div className="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-primary-900/50 ring-1 ring-white/20">
+            <Waves className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-xl font-bold text-white">لوحة تحكم أكواتك</h1>
           <p className="text-primary-300 text-sm mt-1">سجّل الدخول لإدارة موقعك</p>
@@ -72,6 +76,10 @@ export default function AdminLoginPage() {
             <LoginForm />
           </Suspense>
         </div>
+
+        <p className="text-center text-primary-300/70 text-xs mt-6">
+          © {new Date().getFullYear()} أكواتك CMS — جميع الحقوق محفوظة
+        </p>
       </div>
     </main>
   );

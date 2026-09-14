@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import { ChevronDown } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'الأسئلة الشائعة' };
@@ -32,14 +32,7 @@ export default async function FaqPage() {
     <PublicLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumbs crumbs={[{ label: 'الأسئلة الشائعة' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="faq" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">الأسئلة الشائعة</h1>
-          <p className="text-primary-200">إجابات شاملة على أكثر الأسئلة شيوعاً</p>
-        </div>
-      </section>
+      <PageHero title="الأسئلة الشائعة" subtitle="إجابات شاملة على أكثر الأسئلة شيوعاً" pageKey="faq" />
 
       <div className="max-w-3xl mx-auto px-4 py-12">
         {categories.length > 0 && (

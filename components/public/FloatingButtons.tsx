@@ -48,7 +48,7 @@ export default function FloatingButtons({ whatsapp, phone }: Props) {
       {/* زر التواصل الرئيسي */}
       {(phone || whatsapp) && (
         <button onClick={() => setOpen(!open)}
-          className="w-14 h-14 bg-primary-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-primary-700 transition-all duration-200"
+          className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all duration-200 animate-fab-pulse"
           aria-label="تواصل معنا">
           {open
             ? <X className="w-6 h-6" />
@@ -59,7 +59,7 @@ export default function FloatingButtons({ whatsapp, phone }: Props) {
       {/* العودة للأعلى */}
       {showTop && (
         <button onClick={scrollToTop}
-          className="w-11 h-11 bg-gray-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-900 transition backdrop-blur-sm"
+          className="w-11 h-11 bg-gray-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-900 hover:scale-110 transition backdrop-blur-sm duration-200"
           aria-label="العودة للأعلى">
           <ArrowUp className="w-5 h-5" />
         </button>

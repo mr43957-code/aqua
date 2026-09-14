@@ -48,7 +48,7 @@ export default function HeroSlider({ slider, items }: { slider: Slider; items: S
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover bg-animate-zoom"
               />
             ) : (
               <Image
@@ -56,7 +56,7 @@ export default function HeroSlider({ slider, items }: { slider: Slider; items: S
                 alt={item.title ?? ''}
                 fill
                 priority={i === 0}
-                className="object-cover"
+                className={`object-cover ${i === index ? 'bg-animate-zoom' : ''}`}
                 unoptimized
               />
             )
@@ -68,6 +68,8 @@ export default function HeroSlider({ slider, items }: { slider: Slider; items: S
             className="absolute inset-0"
             style={{ backgroundColor: item.overlay_color ?? 'rgba(0,0,0,0.45)' }}
           />
+          {/* تدرج سفلي لدمج السلايدر مع المحتوى التالي */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
         </div>
       ))}
 
@@ -122,14 +124,14 @@ export default function HeroSlider({ slider, items }: { slider: Slider; items: S
         <>
           <button
             onClick={prev}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/15 hover:bg-primary-600 backdrop-blur-md p-3 rounded-full transition-all duration-300 hover:scale-110 border border-white/20"
             aria-label="السابق"
           >
             <ChevronRight className="w-5 h-5 text-white" />
           </button>
           <button
             onClick={next}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/15 hover:bg-primary-600 backdrop-blur-md p-3 rounded-full transition-all duration-300 hover:scale-110 border border-white/20"
             aria-label="التالي"
           >
             <ChevronLeft className="w-5 h-5 text-white" />

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import { Wrench } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'خدماتنا' };
@@ -21,14 +21,7 @@ export default async function ServicesPage() {
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'الخدمات' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="services" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">خدماتنا</h1>
-          <p className="text-primary-200">حلول متكاملة في مجال حمامات السباحة وشبكات المياه</p>
-        </div>
-      </section>
+      <PageHero title="خدماتنا" subtitle="حلول متكاملة في مجال حمامات السباحة وشبكات المياه" pageKey="services" />
 
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

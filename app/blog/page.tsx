@@ -5,7 +5,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import { Clock, Tag } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'المدونة' };
@@ -25,14 +25,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'المدونة' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="blog" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">المدونة</h1>
-          <p className="text-primary-200">مقالات ونصائح في مجال حمامات السباحة وشبكات المياه</p>
-        </div>
-      </section>
+      <PageHero title="المدونة" subtitle="مقالات ونصائح في مجال حمامات السباحة وشبكات المياه" pageKey="blog" />
 
       <div className="max-w-5xl mx-auto px-4 py-12">
         {categories.length > 0 && (

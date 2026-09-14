@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import QuoteForm from './QuoteForm';
 import { createClient } from '@/lib/supabase/server';
 import { CheckCircle } from 'lucide-react';
@@ -27,14 +27,7 @@ export default async function QuotePage() {
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'طلب عرض سعر' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="quote" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">طلب عرض سعر مجاني</h1>
-          <p className="text-primary-200">أخبرنا عن مشروعك وسنتواصل معك خلال 24 ساعة</p>
-        </div>
-      </section>
+      <PageHero title="طلب عرض سعر مجاني" subtitle="أخبرنا عن مشروعك وسنتواصل معك خلال 24 ساعة" pageKey="quote" />
 
       <div className="max-w-5xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">

@@ -3,6 +3,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 import { logActivity } from '@/lib/utils/logger';
 
 export type LoginResult = { error?: string };
@@ -54,6 +55,7 @@ export async function loginAction(_prev: LoginResult, formData: FormData): Promi
     severity: 'info',
   });
 
+  revalidatePath('/', 'layout');
   redirect(redirectTo.startsWith('/admin') ? redirectTo : '/admin/dashboard');
 }
 

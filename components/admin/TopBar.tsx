@@ -14,7 +14,7 @@ export default async function TopBar({ title }: { title?: string }) {
     .eq('is_read', false);
 
   return (
-    <header className="h-14 bg-white border-b border-gray-100 flex items-center px-6 gap-4 sticky top-0 z-30">
+    <header className="h-14 bg-white/85 backdrop-blur-xl border-b border-gray-100 flex items-center px-6 gap-4 sticky top-0 z-30">
       {title && <h1 className="text-base font-semibold text-gray-800 flex-1">{title}</h1>}
       {!title && <div className="flex-1" />}
 
@@ -22,16 +22,16 @@ export default async function TopBar({ title }: { title?: string }) {
         <Link
           href="/"
           target="_blank"
-          className="text-gray-400 hover:text-primary-600 transition"
+          className="text-gray-400 hover:text-primary-600 p-2 rounded-xl hover:bg-primary-50 transition"
           title="معاينة الموقع"
         >
           <ExternalLink className="w-5 h-5" />
         </Link>
 
-        <Link href="/admin/notifications" className="relative text-gray-400 hover:text-primary-600 transition">
+        <Link href="/admin/notifications" className="relative text-gray-400 hover:text-primary-600 p-2 rounded-xl hover:bg-primary-50 transition" title="الإشعارات">
           <Bell className="w-5 h-5" />
           {!!unreadCount && unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center">
+            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center shadow">
               {unreadCount > 9 ? '9+' : unreadCount}
             </span>
           )}
@@ -43,7 +43,7 @@ export default async function TopBar({ title }: { title?: string }) {
             <p className="text-[10px] text-gray-400">{user?.email}</p>
           </div>
           <form action={logoutAction}>
-            <button className="text-gray-400 hover:text-red-500 transition" title="تسجيل الخروج">
+            <button className="text-gray-400 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 transition" title="تسجيل الخروج">
               <LogOut className="w-4 h-4" />
             </button>
           </form>

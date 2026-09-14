@@ -41,8 +41,15 @@ export default async function Footer() {
   const copyright = settings.footer_copyright ?? `© ${new Date().getFullYear()} ${siteName}. جميع الحقوق محفوظة.`;
 
   return (
-    <footer dir="rtl" className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <footer dir="rtl" className="bg-gray-900 text-gray-300 relative">
+      {/* شريط موجي عند أعلى الفوتر */}
+      <div className="w-full overflow-hidden leading-[0] text-primary-700">
+        <svg viewBox="0 0 1200 40" preserveAspectRatio="none" className="w-full h-10 block">
+          <path d="M0,20 C200,40 400,0 600,20 C800,40 1000,0 1200,20 L1200,40 L0,40 Z" fill="currentColor" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 pt-10 pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {/* عمود 1 — عن الشركة */}
@@ -62,7 +69,7 @@ export default async function Footer() {
               <div className="flex gap-2 flex-wrap">
                 {socialLinks.map((s, i) => (
                   <a key={i} href={s.url ?? '#'} target="_blank" rel="noopener noreferrer"
-                    className="w-9 h-9 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition"
+                    className="w-9 h-9 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 hover:to-primary-700 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
                     aria-label={s.label}>
                     <s.icon className="w-4 h-4" />
                   </a>

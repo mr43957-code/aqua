@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import ProductCard from '@/components/public/ProductCard';
 import { Package } from 'lucide-react';
 
@@ -45,14 +45,7 @@ export default async function ProductsPage({
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'المتجر' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="products" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">متجرنا</h1>
-          <p className="text-primary-200">مستلزمات حمامات السباحة الأصلية بأفضل الأسعار</p>
-        </div>
-      </section>
+      <PageHero title="متجرنا" subtitle="مستلزمات حمامات السباحة الأصلية بأفضل الأسعار" pageKey="products" />
 
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex flex-col lg:flex-row gap-8">

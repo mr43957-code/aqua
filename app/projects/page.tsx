@@ -5,7 +5,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import PageBackground from '@/components/public/PageBackground';
+import PageHero from '@/components/public/PageHero';
 import { StatusBadge } from '@/components/ui/Badge';
 import { MapPin, FolderOpen } from 'lucide-react';
 
@@ -29,14 +29,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: { s
   return (
     <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'المشاريع' }]} />
-
-      <section className="relative bg-primary-800 text-white py-20 text-center overflow-hidden">
-        <PageBackground pageKey="projects" />
-        <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-3">معرض مشاريعنا</h1>
-          <p className="text-primary-200">{projects.length}+ مشروع منجز بكل احترافية</p>
-        </div>
-      </section>
+      <PageHero title="معرض مشاريعنا" subtitle={`${projects.length}+ مشروع منجز بكل احترافية`} pageKey="projects" />
 
       <div className="max-w-7xl mx-auto px-4 py-12">
         {services.length > 1 && (
