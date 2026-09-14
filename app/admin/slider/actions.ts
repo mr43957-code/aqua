@@ -2,7 +2,7 @@
 'use server';
 
 import { createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function updateSliderSettingsAction(sliderId: string, formData: FormData) {
   const admin = createAdminClient();
@@ -19,6 +19,7 @@ export async function updateSliderSettingsAction(sliderId: string, formData: For
     .eq('id', sliderId);
   if (error) throw new Error(error.message);
   revalidatePath('/');
+  revalidateTag('public');
   revalidatePath('/admin/slider');
 }
 
@@ -41,6 +42,7 @@ export async function createSlideAction(sliderId: string, formData: FormData) {
   });
   if (error) throw new Error(error.message);
   revalidatePath('/');
+  revalidateTag('public');
   revalidatePath('/admin/slider');
 }
 
@@ -62,6 +64,7 @@ export async function updateSlideAction(id: string, formData: FormData) {
     .eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/');
+  revalidateTag('public');
   revalidatePath('/admin/slider');
 }
 
@@ -70,6 +73,7 @@ export async function deleteSlideAction(id: string) {
   const { error } = await admin.from('slider_items').delete().eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/');
+  revalidateTag('public');
   revalidatePath('/admin/slider');
 }
 
@@ -79,5 +83,6 @@ export async function reorderSlidesAction(orderedIds: string[]) {
     orderedIds.map((id, idx) => admin.from('slider_items').update({ sort_order: idx }).eq('id', id))
   );
   revalidatePath('/');
+  revalidateTag('public');
   revalidatePath('/admin/slider');
 }

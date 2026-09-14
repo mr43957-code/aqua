@@ -1,5 +1,5 @@
 // app/search/page.tsx
-import { createClient } from '@/lib/supabase/server';
+import { getSearchPageData } from '@/lib/actions/public-data';
 import type { Metadata } from 'next';
 import Header from '@/components/public/Header';
 import Footer from '@/components/public/Footer';
@@ -16,16 +16,11 @@ export default async function SearchPage({ searchParams }: { searchParams: { q?:
   let services: any[] = [], products: any[] = [], projects: any[] = [], articles: any[] = [];
 
   if (q.length >= 2) {
-    const like = `%${q}%`;
-    const supabase = createClient();
-    const results = await Promise.allSettled([
-      supabase.from('services').select('id,title,slug,description,cover_image_url').eq('is_published', true).or(`title.ilike.${like},description.ilike.${like}`).limit(4),
-      supabase.from('products').select('id,name,slug,image_url,price,currency').eq('is_published', true).ilike('name', like).limit(4),
-      supabase.from('projects').select('id,title,slug,location,cover_image_url').eq('is_published', true).or(`title.ilike.${like},description.ilike.${like}`).limit(4),
-      supabase.from('articles').select('id,title,slug,excerpt,cover_image_url').eq('is_published', true).or(`title.ilike.${like},excerpt.ilike.${like}`).limit(4),
-    ]);
-    const get = <T,>(i: number): T[] => results[i].status === 'fulfilled' ? ((results[i] as any).value.data ?? []) : [];
-    services = get(0); products = get(1); projects = get(2); articles = get(3);
+    try {
+      const results = await getSearchPageData(q);
+      services = results.services; products = results.products;
+      projects = results.projects; articles = results.articles;
+    } catch {}
   }
 
   const total = services.length + products.length + projects.length + articles.length;

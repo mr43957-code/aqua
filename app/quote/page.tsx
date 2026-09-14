@@ -4,7 +4,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import QuoteForm from './QuoteForm';
-import { createClient } from '@/lib/supabase/server';
+import { getQuoteServices } from '@/lib/actions/public-data';
 import { CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'طلب عرض سعر مجاني' };
@@ -12,9 +12,7 @@ export const metadata: Metadata = { title: 'طلب عرض سعر مجاني' };
 export default async function QuotePage() {
   let services: any[] = [];
   try {
-    const supabase = createClient();
-    const { data } = await supabase.from('services').select('id, title').eq('is_published', true).order('sort_order');
-    services = data ?? [];
+    services = await getQuoteServices();
   } catch {}
 
   const benefits = [

@@ -2,7 +2,7 @@
 'use server';
 
 import { createClient, createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { logActivity } from '@/lib/utils/logger';
 
 export async function saveSiteSettingsAction(formData: FormData) {
@@ -40,5 +40,6 @@ export async function saveSiteSettingsAction(formData: FormData) {
 
   // Reflect changes immediately across the public site
   revalidatePath('/', 'layout');
+  revalidateTag('public');
   revalidatePath('/admin/site-builder');
 }

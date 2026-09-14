@@ -35,3 +35,17 @@ export function createAdminClient() {
     { auth: { autoRefreshToken: false, persistSession: false } }
   );
 }
+
+// Public client (no cookies) — for marketing data that doesn't need auth
+// Use with unstable_cache to eliminate per-request DB round-trips
+let _publicClient: ReturnType<typeof createSupabaseClient> | null = null;
+export function createPublicClient(): any {
+  if (!_publicClient) {
+    _publicClient = createSupabaseClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      { auth: { autoRefreshToken: false, persistSession: false } }
+    );
+  }
+  return _publicClient;
+}

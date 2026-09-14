@@ -2,7 +2,7 @@
 'use server';
 
 import { createClient, createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { logActivity } from '@/lib/utils/logger';
 
 export async function updateBackgroundAction(pageKey: string, formData: FormData) {
@@ -41,6 +41,7 @@ export async function updateBackgroundAction(pageKey: string, formData: FormData
 
   // Immediately reflect on the live site
   revalidatePath('/', 'layout');
+  revalidateTag('public');
   revalidatePath('/admin/backgrounds');
 }
 

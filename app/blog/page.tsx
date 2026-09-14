@@ -1,5 +1,5 @@
 // app/blog/page.tsx
-import { createClient } from '@/lib/supabase/server';
+import { getBlogPageData } from '@/lib/actions/public-data';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -14,12 +14,9 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
   let articles: any[] = [];
   let categories: any[] = [];
   try {
-    const supabase = createClient();
-    let q = supabase.from('articles').select('*, category:article_categories(id,name,slug)').eq('is_published', true).order('published_at', { ascending: false });
-    if (searchParams.category) q = q.eq('category_id', searchParams.category);
-    const [{ data: arts }, { data: cats }] = await Promise.all([q, supabase.from('article_categories').select('*')]);
-    articles = arts ?? [];
-    categories = cats ?? [];
+    const data = await getBlogPageData(searchParams.category);
+    articles = data.articles;
+    categories = data.categories;
   } catch {}
 
   return (

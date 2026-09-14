@@ -1,6 +1,6 @@
 // app/about/page.tsx
 import type { Metadata } from 'next';
-import { createClient } from '@/lib/supabase/server';
+import { getAboutPageData } from '@/lib/actions/public-data';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
@@ -11,10 +11,7 @@ export const metadata: Metadata = { title: 'من نحن' };
 export default async function AboutPage() {
   let settings: Record<string, string> = {};
   try {
-    const supabase = createClient();
-    const { data } = await supabase.from('site_settings').select('key, value')
-      .in('key', ['footer_about_text', 'site_name', 'site_description']);
-    settings = (data ?? []).reduce((a, r) => ({ ...a, [r.key]: r.value ?? '' }), {});
+    settings = await getAboutPageData();
   } catch {}
 
   const values = [

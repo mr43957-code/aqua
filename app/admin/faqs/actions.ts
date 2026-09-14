@@ -1,7 +1,7 @@
 // app/admin/faqs/actions.ts
 'use server';
 import { createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function createFaqAction(formData: FormData) {
   const admin = createAdminClient();
@@ -14,6 +14,7 @@ export async function createFaqAction(formData: FormData) {
   if (error) throw new Error(error.message);
   revalidatePath('/admin/faqs');
   revalidatePath('/faq');
+  revalidateTag('public');
 }
 
 export async function updateFaqAction(id: string, formData: FormData) {
@@ -27,6 +28,7 @@ export async function updateFaqAction(id: string, formData: FormData) {
   if (error) throw new Error(error.message);
   revalidatePath('/admin/faqs');
   revalidatePath('/faq');
+  revalidateTag('public');
 }
 
 export async function deleteFaqAction(id: string) {
@@ -35,4 +37,5 @@ export async function deleteFaqAction(id: string) {
   if (error) throw new Error(error.message);
   revalidatePath('/admin/faqs');
   revalidatePath('/faq');
+  revalidateTag('public');
 }

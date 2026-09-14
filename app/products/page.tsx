@@ -1,5 +1,5 @@
 // app/products/page.tsx
-import { createClient } from '@/lib/supabase/server';
+import { getProductsPageData } from '@/lib/actions/public-data';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
@@ -19,25 +19,10 @@ export default async function ProductsPage({
   let brands: any[] = [];
 
   try {
-    const supabase = createClient();
-    let q = supabase.from('products')
-      .select('*, category:product_categories(id,name), brand:brands(id,name)')
-      .eq('is_published', true)
-      .order('is_featured', { ascending: false })
-      .order('created_at', { ascending: false });
-
-    if (searchParams.category) q = q.eq('category_id', searchParams.category);
-    if (searchParams.brand) q = q.eq('brand_id', searchParams.brand);
-    if (searchParams.q) q = q.ilike('name', `%${searchParams.q}%`);
-
-    const [{ data: prods }, { data: cats }, { data: brs }] = await Promise.all([
-      q,
-      supabase.from('product_categories').select('*').eq('is_active', true).order('sort_order'),
-      supabase.from('brands').select('*').eq('is_active', true).order('name'),
-    ]);
-    products = prods ?? [];
-    categories = cats ?? [];
-    brands = brs ?? [];
+    const data = await getProductsPageData(searchParams.category, searchParams.brand, searchParams.q);
+    products = data.products;
+    categories = data.categories;
+    brands = data.brands;
   } catch {}
 
   const hasFilters = searchParams.category || searchParams.brand || searchParams.q;

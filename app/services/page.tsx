@@ -1,5 +1,5 @@
 // app/services/page.tsx
-import { createClient } from '@/lib/supabase/server';
+import { getServicesPageData } from '@/lib/actions/public-data';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -13,9 +13,7 @@ export const metadata: Metadata = { title: 'خدماتنا' };
 export default async function ServicesPage() {
   let services: any[] = [];
   try {
-    const supabase = createClient();
-    const { data } = await supabase.from('services').select('*').eq('is_published', true).order('sort_order');
-    services = data ?? [];
+    services = await getServicesPageData();
   } catch {}
 
   return (

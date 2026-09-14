@@ -4,7 +4,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import ContactForm from './ContactForm';
-import { createClient } from '@/lib/supabase/server';
+import { getContactPageData } from '@/lib/actions/public-data';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'اتصل بنا' };
@@ -12,10 +12,7 @@ export const metadata: Metadata = { title: 'اتصل بنا' };
 export default async function ContactPage() {
   let settings: Record<string, string> = {};
   try {
-    const supabase = createClient();
-    const { data } = await supabase.from('site_settings').select('key, value')
-      .in('key', ['contact_phone','contact_phone_2','contact_email','contact_address','contact_whatsapp']);
-    settings = (data ?? []).reduce((a, r) => ({ ...a, [r.key]: r.value ?? '' }), {});
+    settings = await getContactPageData();
   } catch {}
 
   return (

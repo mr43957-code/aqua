@@ -2,7 +2,7 @@
 'use server';
 
 import { createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { uniqueSlug } from '@/lib/utils/helpers';
 import { logActivity } from '@/lib/utils/logger';
 
@@ -35,6 +35,7 @@ export async function createProjectAction(formData: FormData) {
   revalidatePath('/admin/projects');
   revalidatePath('/projects');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 export async function updateProjectAction(id: string, formData: FormData) {
@@ -66,6 +67,7 @@ export async function updateProjectAction(id: string, formData: FormData) {
   revalidatePath('/admin/projects');
   revalidatePath('/projects');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 export async function deleteProjectAction(id: string) {
@@ -77,4 +79,5 @@ export async function deleteProjectAction(id: string) {
   revalidatePath('/admin/projects');
   revalidatePath('/projects');
   revalidatePath('/');
+  revalidateTag('public');
 }

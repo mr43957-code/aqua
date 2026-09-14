@@ -1,5 +1,5 @@
 // app/faq/page.tsx
-import { createClient } from '@/lib/supabase/server';
+import { getFaqPageData } from '@/lib/actions/public-data';
 import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
@@ -11,9 +11,7 @@ export const metadata: Metadata = { title: 'الأسئلة الشائعة' };
 export default async function FaqPage() {
   let faqs: any[] = [];
   try {
-    const supabase = createClient();
-    const { data } = await supabase.from('faqs').select('*').eq('is_published', true).order('sort_order');
-    faqs = data ?? [];
+    faqs = await getFaqPageData();
   } catch {}
 
   const categories = [...new Set(faqs.map((f) => f.category).filter(Boolean))];

@@ -2,7 +2,7 @@
 'use server';
 
 import { createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { uniqueSlug } from '@/lib/utils/helpers';
 import { logActivity } from '@/lib/utils/logger';
 
@@ -39,6 +39,7 @@ export async function createProductAction(formData: FormData) {
   revalidatePath('/admin/products');
   revalidatePath('/products');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 export async function updateProductAction(id: string, formData: FormData) {
@@ -73,6 +74,7 @@ export async function updateProductAction(id: string, formData: FormData) {
   revalidatePath('/admin/products');
   revalidatePath('/products');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 export async function deleteProductAction(id: string) {
@@ -84,6 +86,7 @@ export async function deleteProductAction(id: string) {
   revalidatePath('/admin/products');
   revalidatePath('/products');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 // ===== CATEGORIES =====

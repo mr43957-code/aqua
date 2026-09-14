@@ -1,5 +1,4 @@
 // app/page.tsx — الصفحة الرئيسية
-import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -12,39 +11,24 @@ import FloatingButtons from '@/components/public/FloatingButtons';
 import Reveal from '@/components/public/Reveal';
 import { Star, MapPin, Wrench, Package, FolderOpen, Award, CheckCircle } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
+import { getHomePageData } from '@/lib/actions/public-data';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60; // ISR: تقدَّم الصفحة من الـ edge كل 60 ثانية بدلاً من كل طلب
 
 export default async function HomePage() {
-  const supabase = createClient();
+  const data = await getHomePageData();
 
-  const results = await Promise.allSettled([
-    supabase.from('sliders').select('*, slider_items(*)').eq('position', 'home_hero').eq('is_active', true).single(),
-    supabase.from('sliders').select('*, slider_items(*)').eq('position', 'home_bottom').eq('is_active', true).single(),
-    supabase.from('services').select('id,title,slug,description,cover_image_url').eq('is_published', true).order('sort_order').limit(6),
-    supabase.from('projects').select('id,title,slug,location,cover_image_url').eq('is_published', true).order('created_at',{ascending:false}).limit(3),
-    supabase.from('stats').select('*').eq('is_active', true).order('sort_order'),
-    supabase.from('testimonials').select('*').eq('is_published', true).order('sort_order').limit(6),
-    supabase.from('products').select('id,name,slug,image_url,price,sale_price,currency').eq('is_published', true).eq('is_featured', true).limit(4),
-    supabase.from('partners').select('*').eq('is_active', true).order('sort_order').limit(30),
-    supabase.from('site_settings').select('key,value').in('key',['site_name','site_tagline','site_description','contact_phone','contact_whatsapp','contact_address']),
-    supabase.from('faqs').select('id,question,answer').eq('is_published', true).order('sort_order').limit(6),
-  ]);
+  const heroSlider    = data.heroSlider;
+  const bottomSlider  = data.bottomSlider;
+  const services      = data.services;
+  const projects      = data.projects;
+  const stats         = data.stats;
+  const testimonials  = data.testimonials;
+  const featuredProds = data.featuredProds;
+  const partners      = data.partners as Partner[];
+  const faqs          = data.faqs;
 
-  const get = <T,>(i: number, fallback: T): T =>
-    results[i].status === 'fulfilled' ? ((results[i] as PromiseFulfilledResult<any>).value.data ?? fallback) : fallback;
-
-  const heroSlider    = get<any>(0, null);
-  const bottomSlider  = get<any>(1, null);
-  const services      = get<any[]>(2, []);
-  const projects      = get<any[]>(3, []);
-  const stats         = get<any[]>(4, []);
-  const testimonials  = get<any[]>(5, []);
-  const featuredProds = get<any[]>(6, []);
-  const partners      = get<Partner[]>(7, []);
-  const settingsArr   = get<any[]>(8, []);
-  const faqs          = get<any[]>(9, []);
-
+  const settingsArr   = data.settingsArr;
   const s: Record<string, string> = settingsArr.reduce((a: Record<string,string>, r: any) => ({ ...a, [r.key]: r.value ?? '' }), {});
   const heroItems = [...(heroSlider?.slider_items ?? [])].sort((a:any,b:any) => a.sort_order - b.sort_order);
   const bottomItems = [...(bottomSlider?.slider_items ?? [])].sort((a:any,b:any) => a.sort_order - b.sort_order);

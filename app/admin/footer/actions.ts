@@ -2,7 +2,7 @@
 'use server';
 
 import { createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { logActivity } from '@/lib/utils/logger';
 
 async function log(userId: string | undefined, action: string) {
@@ -29,6 +29,7 @@ export async function saveFooterColumnAction(formData: FormData) {
   }
   await log(undefined, id ? `تعديل عمود فوتر: ${payload.title}` : `إضافة عمود فوتر: ${payload.title}`);
   revalidatePath('/', 'layout');
+  revalidateTag('public');
   revalidatePath('/admin/footer');
 }
 
@@ -38,6 +39,7 @@ export async function deleteFooterColumnAction(id: string) {
   if (error) throw new Error(error.message);
   await log(undefined, `حذف عمود فوتر`);
   revalidatePath('/', 'layout');
+  revalidateTag('public');
   revalidatePath('/admin/footer');
 }
 
@@ -61,6 +63,7 @@ export async function saveFooterLinkAction(formData: FormData) {
   }
   await log(undefined, id ? `تعديل رابط فوتر: ${payload.label}` : `إضافة رابط فوتر: ${payload.label}`);
   revalidatePath('/', 'layout');
+  revalidateTag('public');
   revalidatePath('/admin/footer');
 }
 
@@ -70,5 +73,6 @@ export async function deleteFooterLinkAction(id: string) {
   if (error) throw new Error(error.message);
   await log(undefined, `حذف رابط فوتر`);
   revalidatePath('/', 'layout');
+  revalidateTag('public');
   revalidatePath('/admin/footer');
 }

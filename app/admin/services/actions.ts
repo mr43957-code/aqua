@@ -2,7 +2,7 @@
 'use server';
 
 import { createClient, createAdminClient } from '@/lib/supabase/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { uniqueSlug } from '@/lib/utils/helpers';
 import { logActivity } from '@/lib/utils/logger';
 
@@ -39,6 +39,7 @@ export async function createServiceAction(formData: FormData) {
   revalidatePath('/admin/services');
   revalidatePath('/services');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 export async function updateServiceAction(id: string, formData: FormData) {
@@ -65,6 +66,7 @@ export async function updateServiceAction(id: string, formData: FormData) {
   revalidatePath('/admin/services');
   revalidatePath('/services');
   revalidatePath('/');
+  revalidateTag('public');
 }
 
 export async function deleteServiceAction(id: string) {
@@ -78,4 +80,5 @@ export async function deleteServiceAction(id: string) {
   revalidatePath('/admin/services');
   revalidatePath('/services');
   revalidatePath('/');
+  revalidateTag('public');
 }

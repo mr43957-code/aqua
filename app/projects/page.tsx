@@ -1,5 +1,5 @@
 // app/projects/page.tsx
-import { createClient } from '@/lib/supabase/server';
+import { getProjectsPageData } from '@/lib/actions/public-data';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -15,15 +15,9 @@ export default async function ProjectsPage({ searchParams }: { searchParams: { s
   let projects: any[] = [];
   let services: any[] = [];
   try {
-    const supabase = createClient();
-    let q = supabase.from('projects').select('*').eq('is_published', true).order('created_at', { ascending: false });
-    if (searchParams.service) q = q.eq('service_id', searchParams.service);
-    const [{ data: projs }, { data: srvs }] = await Promise.all([
-      q,
-      supabase.from('services').select('id, title').eq('is_published', true),
-    ]);
-    projects = projs ?? [];
-    services = srvs ?? [];
+    const data = await getProjectsPageData(searchParams.service);
+    projects = data.projects;
+    services = data.services;
   } catch {}
 
   return (

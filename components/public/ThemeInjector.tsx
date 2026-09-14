@@ -1,6 +1,7 @@
 // components/public/ThemeInjector.tsx
 // يُحقن CSS ديناميكي في <body> لتطبيق الثيم على الموقع كله
-import { createClient } from '@/lib/supabase/server';
+// يستخدم getActiveTheme المخزّنة (بدون كوكيز) — لا تجعل الصفحة ديناميكية
+import { getActiveTheme } from '@/lib/actions/public-data';
 
 function hexToRgb(hex: string) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -31,13 +32,7 @@ function generateShades(hex: string): Record<number, string> {
 export default async function ThemeInjector() {
   let theme: Record<string, string> | null = null;
   try {
-    const supabase = createClient();
-    const { data } = await supabase
-      .from('theme_settings')
-      .select('*')
-      .eq('is_active', true)
-      .single();
-    theme = data;
+    theme = await getActiveTheme();
   } catch { return null; }
 
   if (!theme) return null;
