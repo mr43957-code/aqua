@@ -9,7 +9,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import { Wrench } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'خدماتنا' };
+export const metadata: Metadata = { alternates: { canonical: '/services' }, title: 'خدماتنا' };
 
 export default async function ServicesPage() {
   let services: any[] = [];

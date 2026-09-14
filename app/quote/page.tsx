@@ -7,7 +7,7 @@ import QuoteForm from './QuoteForm';
 import { getQuoteServices } from '@/lib/actions/public-data';
 import { CheckCircle } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'طلب عرض سعر مجاني' };
+export const metadata: Metadata = { alternates: { canonical: '/quote' }, title: 'طلب عرض سعر مجاني' };
 
 export default async function QuotePage() {
   let services: any[] = [];

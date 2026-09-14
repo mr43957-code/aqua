@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Wrench, Package, FolderOpen, FileText } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'البحث' };
+export const metadata: Metadata = { alternates: { canonical: '/search' }, title: 'البحث' };
 
 export default async function SearchPage({ searchParams }: { searchParams: { q?: string } }) {
   const q = (searchParams.q ?? '').trim();

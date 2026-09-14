@@ -9,7 +9,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import { Clock, Tag } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'المدونة' };
+export const metadata: Metadata = { alternates: { canonical: '/blog' }, title: 'المدونة' };
 
 export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
   let articles: any[] = [];

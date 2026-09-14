@@ -10,7 +10,7 @@ import { StatusBadge } from '@/components/ui/Badge';
 import JsonLd from '@/components/public/JsonLd';
 import { MapPin, FolderOpen } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'مشاريعنا' };
+export const metadata: Metadata = { alternates: { canonical: '/projects' }, title: 'مشاريعنا' };
 
 export default async function ProjectsPage({ searchParams }: { searchParams: { service?: string } }) {
   let projects: any[] = [];

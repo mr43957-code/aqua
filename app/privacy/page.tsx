@@ -6,7 +6,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'سياسة الخصوصية' };
+export const metadata: Metadata = { alternates: { canonical: '/privacy' }, title: 'سياسة الخصوصية' };
 
 const sections = [
   {

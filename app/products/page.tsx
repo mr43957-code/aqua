@@ -8,7 +8,7 @@ import ProductCard from '@/components/public/ProductCard';
 import JsonLd from '@/components/public/JsonLd';
 import { Package } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'متجر مستلزمات حمامات السباحة' };
+export const metadata: Metadata = { alternates: { canonical: '/products' }, title: 'متجر مستلزمات حمامات السباحة' };
 
 export default async function ProductsPage({
   searchParams,

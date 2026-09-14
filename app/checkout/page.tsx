@@ -4,7 +4,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import CheckoutClient from './CheckoutClient';
 
-export const metadata: Metadata = { title: 'إتمام الطلب' };
+export const metadata: Metadata = { alternates: { canonical: '/checkout' }, title: 'إتمام الطلب' };
 
 export default function CheckoutPage() {
   return (

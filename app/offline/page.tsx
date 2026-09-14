@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'أنت الآن دون اتصال' };
+export const metadata: Metadata = { alternates: { canonical: '/offline' }, title: 'أنت الآن دون اتصال' };
 
 export default function OfflinePage() {
   return (

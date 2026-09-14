@@ -6,7 +6,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'شروط الاستخدام' };
+export const metadata: Metadata = { alternates: { canonical: '/terms' }, title: 'شروط الاستخدام' };
 
 const sections = [
   {

@@ -6,7 +6,7 @@ import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import { ChevronDown } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'الأسئلة الشائعة' };
+export const metadata: Metadata = { alternates: { canonical: '/faq' }, title: 'الأسئلة الشائعة' };
 
 export default async function FaqPage() {
   let faqs: any[] = [];

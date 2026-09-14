@@ -4,7 +4,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import TrackClient from './TrackClient';
 
-export const metadata: Metadata = { title: 'تتبع طلبي' };
+export const metadata: Metadata = { alternates: { canonical: '/track' }, title: 'تتبع طلبي' };
 
 export default function TrackOrderPage() {
   return (

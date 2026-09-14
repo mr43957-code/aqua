@@ -8,7 +8,7 @@ import JsonLd from '@/components/public/JsonLd';
 import { getContactPageData } from '@/lib/actions/public-data';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'اتصل بنا' };
+export const metadata: Metadata = { alternates: { canonical: '/contact' }, title: 'اتصل بنا' };
 
 export default async function ContactPage() {
   let settings: Record<string, string> = {};
