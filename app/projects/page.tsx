@@ -7,6 +7,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import { StatusBadge } from '@/components/ui/Badge';
+import JsonLd from '@/components/public/JsonLd';
 import { MapPin, FolderOpen } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'مشاريعنا' };
@@ -20,8 +21,21 @@ export default async function ProjectsPage({ searchParams }: { searchParams: { s
     services = data.services;
   } catch {}
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'معرض مشاريعنا',
+    itemListElement: projects.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `/projects/${p.slug}`,
+    })),
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={jsonLd} />
       <Breadcrumbs crumbs={[{ label: 'المشاريع' }]} />
       <PageHero title="معرض مشاريعنا" subtitle={`${projects.length}+ مشروع منجز بكل احترافية`} pageKey="projects" />
 

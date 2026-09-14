@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
+import JsonLd from '@/components/public/JsonLd';
 import { Wrench } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'خدماتنا' };
@@ -16,8 +17,21 @@ export default async function ServicesPage() {
     services = await getServicesPageData();
   } catch {}
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'خدماتنا',
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: s.title,
+      url: `/services/${s.slug}`,
+    })),
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={jsonLd} />
       <Breadcrumbs crumbs={[{ label: 'الخدمات' }]} />
       <PageHero title="خدماتنا" subtitle="حلول متكاملة في مجال حمامات السباحة وشبكات المياه" pageKey="services" />
 

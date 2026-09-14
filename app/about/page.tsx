@@ -4,6 +4,7 @@ import { getAboutPageData } from '@/lib/actions/public-data';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
+import JsonLd from '@/components/public/JsonLd';
 import { CheckCircle, Target, Eye, Users } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'من نحن' };
@@ -21,8 +22,16 @@ export default async function AboutPage() {
     { icon: Users, title: 'فريق متخصص', desc: 'مهندسون وفنيون ذوو خبرة عالية في مجالهم' },
   ];
 
+  const aboutLd = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'من نحن',
+    description: settings.site_description || undefined,
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={aboutLd} />
       <Breadcrumbs crumbs={[{ label: 'من نحن' }]} />
       <PageHero title="من نحن" subtitle={settings.site_description || 'نتميز بخبرة طويلة وفريق متخصص يضمن لك أفضل نتيجة'} pageKey="about" />
 

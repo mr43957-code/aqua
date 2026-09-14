@@ -9,6 +9,7 @@ import BottomSlider from '@/components/public/BottomSlider';
 import PartnersMarquee, { type Partner } from '@/components/public/PartnersMarquee';
 import FloatingButtons from '@/components/public/FloatingButtons';
 import Reveal from '@/components/public/Reveal';
+import JsonLd from '@/components/public/JsonLd';
 import { Star, MapPin, Wrench, Package, FolderOpen, Award, CheckCircle } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { getHomePageData } from '@/lib/actions/public-data';
@@ -33,10 +34,23 @@ export default async function HomePage() {
   const heroItems = [...(heroSlider?.slider_items ?? [])].sort((a:any,b:any) => a.sort_order - b.sort_order);
   const bottomItems = [...(bottomSlider?.slider_items ?? [])].sort((a:any,b:any) => a.sort_order - b.sort_order);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com';
+  const localBusinessLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: s.site_name || 'أكوا فيجن',
+    description: s.site_description || undefined,
+    url: siteUrl,
+    telephone: s.contact_phone || undefined,
+    address: s.contact_address ? { '@type': 'PostalAddress', streetAddress: s.contact_address } : undefined,
+    areaServed: 'مصر',
+  };
+
   return (
     // flex-col لضمان الترتيب العمودي الصحيح: هيدر → سلايدر → باقي الصفحة
     <div className="flex flex-col min-h-screen">
       {/* ✅ الهيدر أولاً — sticky يبقى في مكانه عند التمرير */}
+      <JsonLd data={localBusinessLd} />
       <Header />
 
       {/* ✅ المحتوى الرئيسي يبدأ مباشرة بعد الهيدر في التدفق الطبيعي */}

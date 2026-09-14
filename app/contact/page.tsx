@@ -4,6 +4,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import ContactForm from './ContactForm';
+import JsonLd from '@/components/public/JsonLd';
 import { getContactPageData } from '@/lib/actions/public-data';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 
@@ -15,8 +16,20 @@ export default async function ContactPage() {
     settings = await getContactPageData();
   } catch {}
 
+  const contactLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'اتصل بنا',
+    mainEntity: {
+      '@type': 'Organization',
+      telephone: settings.contact_phone || settings.contact_phone_2 || undefined,
+      email: settings.contact_email || undefined,
+    },
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={contactLd} />
       <Breadcrumbs crumbs={[{ label: 'اتصل بنا' }]} />
       <PageHero title="اتصل بنا" subtitle="نحن هنا للإجابة عن أسئلتك والمساعدة في مشاريعك" pageKey="contact" />
 

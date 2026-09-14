@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
+import JsonLd from '@/components/public/JsonLd';
 import AddToCartButton from '@/components/public/AddToCartButton';
 import ProductCard from '@/components/public/ProductCard';
 import { CheckCircle, ArrowRight, Package } from 'lucide-react';
@@ -54,6 +55,7 @@ export default async function ProductDetailPage({ params }: Props) {
     description: product.description,
     image: product.image_url,
     sku: product.sku,
+    brand: product.brand ? { '@type': 'Brand', name: product.brand.name } : undefined,
     offers: {
       '@type': 'Offer',
       price,
@@ -61,10 +63,20 @@ export default async function ProductDetailPage({ params }: Props) {
       availability: product.stock_status === 'in_stock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     },
   };
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: '/' },
+      { '@type': 'ListItem', position: 2, name: 'المتجر', item: '/products' },
+      { '@type': 'ListItem', position: 3, name: product.name },
+    ],
+  };
 
   return (
     <PublicLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={breadcrumbLd} />
       <Breadcrumbs crumbs={[
         { label: 'المتجر', href: '/products' },
         ...(product.category ? [{ label: product.category.name, href: `/products?category=${product.category_id}` }] : []),

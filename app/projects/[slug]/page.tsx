@@ -9,6 +9,7 @@ import Breadcrumbs from '@/components/public/Breadcrumbs';
 import { formatDateShort } from '@/lib/utils/helpers';
 import { MapPin, Calendar, User, ArrowRight } from 'lucide-react';
 import { StatusBadge } from '@/components/ui/Badge';
+import JsonLd from '@/components/public/JsonLd';
 
 type Props = { params: { slug: string } };
 
@@ -34,8 +35,29 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const gallery: string[] = Array.isArray(project.gallery) ? project.gallery : [];
 
+  const projectLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: project.description,
+    image: project.cover_image_url,
+    locationCreated: project.location || undefined,
+    dateCreated: project.completion_date || undefined,
+  };
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: '/' },
+      { '@type': 'ListItem', position: 2, name: 'المشاريع', item: '/projects' },
+      { '@type': 'ListItem', position: 3, name: project.title },
+    ],
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={projectLd} />
+      <JsonLd data={breadcrumbLd} />
       <Breadcrumbs crumbs={[{ label: 'المشاريع', href: '/projects' }, { label: project.title }]} />
 
       <div className="max-w-5xl mx-auto px-4 py-10">

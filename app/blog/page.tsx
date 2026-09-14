@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
+import JsonLd from '@/components/public/JsonLd';
 import { Clock, Tag } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'المدونة' };
@@ -19,8 +20,20 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
     categories = data.categories;
   } catch {}
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'مدونة أكوا فيجن',
+    blogPost: articles.map((a) => ({
+      '@type': 'BlogPosting',
+      headline: a.title,
+      url: `/blog/${a.slug}`,
+    })),
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={jsonLd} />
       <Breadcrumbs crumbs={[{ label: 'المدونة' }]} />
       <PageHero title="المدونة" subtitle="مقالات ونصائح في مجال حمامات السباحة وشبكات المياه" pageKey="blog" />
 

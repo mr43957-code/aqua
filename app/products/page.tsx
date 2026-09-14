@@ -5,6 +5,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import ProductCard from '@/components/public/ProductCard';
+import JsonLd from '@/components/public/JsonLd';
 import { Package } from 'lucide-react';
 
 export const metadata: Metadata = { title: 'متجر مستلزمات حمامات السباحة' };
@@ -27,8 +28,21 @@ export default async function ProductsPage({
 
   const hasFilters = searchParams.category || searchParams.brand || searchParams.q;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'متجر مستلزمات حمامات السباحة',
+    itemListElement: products.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.name,
+      url: `/products/${p.slug}`,
+    })),
+  };
+
   return (
     <PublicLayout>
+      <JsonLd data={jsonLd} />
       <Breadcrumbs crumbs={[{ label: 'المتجر' }]} />
       <PageHero title="متجرنا" subtitle="مستلزمات حمامات السباحة الأصلية بأفضل الأسعار" pageKey="products" />
 

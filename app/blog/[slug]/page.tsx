@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
+import JsonLd from '@/components/public/JsonLd';
 import SocialShare from '@/components/public/SocialShare';
 import { Clock, Calendar, User, Tag, ArrowRight } from 'lucide-react';
 import { formatDateShort } from '@/lib/utils/helpers';
@@ -57,10 +58,20 @@ export default async function ArticleDetailPage({ params }: Props) {
     datePublished: article.published_at,
     author: { '@type': 'Person', name: article.author?.full_name ?? 'فريق التحرير' },
   };
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: '/' },
+      { '@type': 'ListItem', position: 2, name: 'المدونة', item: '/blog' },
+      { '@type': 'ListItem', position: 3, name: article.title },
+    ],
+  };
 
   return (
     <PublicLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={breadcrumbLd} />
       <Breadcrumbs crumbs={[{ label: 'المدونة', href: '/blog' }, { label: article.title }]} />
 
       <article className="max-w-3xl mx-auto px-4 py-10">
