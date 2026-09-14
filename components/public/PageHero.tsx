@@ -22,12 +22,14 @@ export default function PageHero({
           <p className="text-primary-200 text-base md:text-lg leading-relaxed animate-fade-zoom" style={{ animationDelay: '0.15s' }}>{subtitle}</p>
         )}
       </div>
-      {/* شريط موجي أسفل الترويسة */}
-      <div className="absolute inset-x-0 bottom-0 h-10 text-white">
+      {/* موجة ناعمة شفافة أسفل الترويسة — تندمج مع المحتوى التالي بدون تداخل */}
+      <div className="absolute inset-x-0 bottom-0 h-8 text-white/20 pointer-events-none">
         <svg viewBox="0 0 1200 40" preserveAspectRatio="none" className="w-full h-full block">
           <path d="M0,20 C200,40 400,0 600,20 C800,40 1000,0 1200,20 L1200,40 L0,40 Z" fill="currentColor" />
         </svg>
       </div>
+      {/* تلاشي سفلي ناعم يزيل الحواف الحادة */}
+      <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-primary-950/40 to-transparent pointer-events-none" />
     </section>
   );
 }

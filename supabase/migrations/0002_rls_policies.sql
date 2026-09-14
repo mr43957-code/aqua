@@ -11,6 +11,8 @@ alter table public.sliders enable row level security;
 alter table public.slider_items enable row level security;
 alter table public.menus enable row level security;
 alter table public.menu_items enable row level security;
+alter table public.footer_columns enable row level security;
+alter table public.footer_links enable row level security;
 alter table public.services enable row level security;
 alter table public.product_categories enable row level security;
 alter table public.brands enable row level security;

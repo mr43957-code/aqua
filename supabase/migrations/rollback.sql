@@ -22,6 +22,8 @@ drop table if exists public.products cascade;
 drop table if exists public.brands cascade;
 drop table if exists public.product_categories cascade;
 drop table if exists public.services cascade;
+drop table if exists public.footer_links cascade;
+drop table if exists public.footer_columns cascade;
 drop table if exists public.menu_items cascade;
 drop table if exists public.menus cascade;
 drop table if exists public.slider_items cascade;

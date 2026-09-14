@@ -63,6 +63,24 @@ export interface PageBackground {
   is_active: boolean;
 }
 
+export interface FooterColumn {
+  id: string;
+  title: string;
+  col_type: 'about' | 'links' | 'contact';
+  display_order: number;
+  is_active: boolean;
+  footer_links?: FooterLink[];
+}
+
+export interface FooterLink {
+  id: string;
+  column_id: string;
+  label: string;
+  url: string;
+  display_order: number;
+  is_active: boolean;
+}
+
 export interface Slider {
   id: string;
   name: string;

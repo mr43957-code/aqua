@@ -31,7 +31,7 @@ export default function HeroSlider({ slider, items }: { slider: Slider; items: S
     // ← position: relative + overflow: hidden لضمان دفع المحتوى للأسفل (لا يوجد absolute على الغلاف)
     <section
       className="relative w-full overflow-hidden"
-      style={{ minHeight: '500px', height: '70vh', maxHeight: '800px' }}
+      style={{ minHeight: '440px', height: '56vh', maxHeight: '680px' }}
     >
       {/* الشرائح */}
       {activeItems.map((item, i) => (

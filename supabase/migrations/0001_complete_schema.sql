@@ -150,6 +150,66 @@ create table if not exists public.menu_items (
 );
 
 -- ============================================================
+-- 7. FOOTER COLUMNS & LINKS (dynamic footer)
+-- ============================================================
+create table if not exists public.footer_columns (
+  id uuid primary key default uuid_generate_v4(),
+  title text not null,
+  col_type text not null default 'links' check (col_type in ('about','links','contact')),
+  display_order int not null default 0,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.footer_links (
+  id uuid primary key default uuid_generate_v4(),
+  column_id uuid not null references public.footer_columns(id) on delete cascade,
+  label text not null,
+  url text not null,
+  display_order int not null default 0,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+-- Default footer columns
+insert into public.footer_columns (title, col_type, display_order) values
+  ('عنا', 'about', 1),
+  ('روابط سريعة', 'links', 2),
+  ('خدماتنا', 'links', 3),
+  ('تواصل معنا', 'contact', 4)
+on conflict do nothing;
+
+insert into public.footer_links (column_id, label, url, display_order)
+select c.id, v.label, v.url, v.ord
+from public.footer_columns c
+cross join lateral (values
+  ('الخدمات', '/services', 1),
+  ('المتجر', '/products', 2),
+  ('المشاريع', '/projects', 3),
+  ('المدونة', '/blog', 4),
+  ('طلب عرض سعر', '/quote', 5),
+  ('اتصل بنا', '/contact', 6),
+  ('الأسئلة الشائعة', '/faq', 7),
+  ('تتبع طلبي', '/track', 8)
+) as v(label, url, ord)
+where c.title = 'روابط سريعة' and c.col_type = 'links'
+and not exists (select 1 from public.footer_links fl where fl.column_id = c.id);
+
+insert into public.footer_links (column_id, label, url, display_order)
+select c.id, v.label, v.url, v.ord
+from public.footer_columns c
+cross join lateral (values
+  ('إنشاء حمامات السباحة', '/services', 1),
+  ('صيانة حمامات السباحة', '/services', 2),
+  ('شبكات المياه', '/services', 3),
+  ('فلترة المياه', '/services', 4),
+  ('الإضاءة المائية', '/services', 5),
+  ('التصميم والتنفيذ', '/services', 6)
+) as v(label, url, ord)
+where c.title = 'خدماتنا' and c.col_type = 'links'
+and not exists (select 1 from public.footer_links fl where fl.column_id = c.id);
+
+-- ============================================================
 -- 7. SERVICES (Enhanced)
 -- ============================================================
 create table if not exists public.services (

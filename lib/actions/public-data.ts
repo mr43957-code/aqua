@@ -26,3 +26,20 @@ export async function getPageBackgroundByKey(pageKey: string) {
   const { data } = await supabase.from('page_backgrounds').select('*').eq('page_key', pageKey).single();
   return data;
 }
+
+export async function getFooterColumns() {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('footer_columns')
+    .select('*, footer_links(*)')
+    .eq('is_active', true)
+    .order('display_order');
+  return (data ?? [])
+    .map((c: any) => ({
+      ...c,
+      footer_links: (c.footer_links ?? [])
+        .filter((l: any) => l.is_active)
+        .sort((a: any, b: any) => a.display_order - b.display_order),
+    }))
+    .sort((a: any, b: any) => a.display_order - b.display_order);
+}

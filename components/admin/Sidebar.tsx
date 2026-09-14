@@ -9,7 +9,7 @@ import {
   LayoutDashboard, Settings, Palette, Image, Layers, Package,
   FolderOpen, FileText, ShoppingCart, MessageSquare, FileQuestion,
   Users, Activity, Bell, Globe, ChevronDown, ChevronRight,
-  Menu, X, ImageIcon, Wrench, BarChart3, Star
+  Menu, X, ImageIcon, Wrench, BarChart3, Star, LayoutTemplate
 } from 'lucide-react';
 
 interface NavItem {
@@ -34,6 +34,7 @@ const navGroups: { title: string; items: NavItem[] }[] = [
       { href: '/admin/site-builder', label: 'Site Builder', icon: Globe },
       { href: '/admin/theme-builder', label: 'Theme Builder', icon: Palette },
       { href: '/admin/backgrounds', label: 'الخلفيات', icon: ImageIcon },
+      { href: '/admin/footer', label: 'الفوتر', icon: LayoutTemplate },
       { href: '/admin/slider', label: 'السلايدر', icon: Layers },
       { href: '/admin/media', label: 'مكتبة الوسائط', icon: Image },
     ],
