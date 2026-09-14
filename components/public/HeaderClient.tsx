@@ -116,7 +116,7 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
                 placeholder="ابحث في الموقع..."
                 className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
               />
-              <button type="submit" className="bg-primary-600 text-white px-3.5 py-2 rounded-xl hover:bg-primary-700 transition">
+              <button type="submit" className="bg-primary-600 text-white px-4 py-3 rounded-xl hover:bg-primary-700 transition">
                 <Search className="w-4 h-4" />
               </button>
             </form>

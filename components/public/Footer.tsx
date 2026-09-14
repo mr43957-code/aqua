@@ -206,21 +206,21 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
                 <div className="space-y-3 text-sm">
                   {settings.contact_phone && (
                     <a href={`tel:${settings.contact_phone}`}
-                      className="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition">
+                      className="flex items-center gap-2 py-3 text-gray-400 hover:text-primary-400 transition">
                       <Phone className="w-4 h-4 text-primary-500 flex-shrink-0" />
                       {settings.contact_phone}
                     </a>
                   )}
                   {settings.contact_phone_2 && (
                     <a href={`tel:${settings.contact_phone_2}`}
-                      className="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition">
+                      className="flex items-center gap-2 py-3 text-gray-400 hover:text-primary-400 transition">
                       <Phone className="w-4 h-4 text-primary-500 flex-shrink-0" />
                       {settings.contact_phone_2}
                     </a>
                   )}
                   {settings.contact_email && (
                     <a href={`mailto:${settings.contact_email}`}
-                      className="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition">
+                      className="flex items-center gap-2 py-3 text-gray-400 hover:text-primary-400 transition">
                       <Mail className="w-4 h-4 text-primary-500 flex-shrink-0" />
                       {settings.contact_email}
                     </a>
@@ -255,10 +255,10 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-gray-500">{copyright}</p>
           <div className="flex gap-4 text-sm text-gray-500">
-            <Link href="/search" className="hover:text-gray-300 transition py-2">البحث</Link>
-            <Link href="/track" className="hover:text-gray-300 transition py-2">تتبع طلبي</Link>
-            <Link href="/faq" className="hover:text-gray-300 transition py-2">الأسئلة الشائعة</Link>
-            <Link href="/sitemap.xml" className="hover:text-gray-300 transition py-2">Sitemap</Link>
+            <Link href="/search" className="hover:text-gray-300 transition py-3">البحث</Link>
+            <Link href="/track" className="hover:text-gray-300 transition py-3">تتبع طلبي</Link>
+            <Link href="/faq" className="hover:text-gray-300 transition py-3">الأسئلة الشائعة</Link>
+            <Link href="/sitemap.xml" className="hover:text-gray-300 transition py-3">Sitemap</Link>
           </div>
         </div>
       </div>
