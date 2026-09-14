@@ -28,21 +28,27 @@ create table if not exists public.footer_links (
 alter table public.footer_columns enable row level security;
 alter table public.footer_links enable row level security;
 
+drop policy if exists "public_read_footer_columns" on public.footer_columns;
+drop policy if exists "admin_write_footer_columns" on public.footer_columns;
 create policy "public_read_footer_columns" on public.footer_columns for select using (true);
 create policy "admin_write_footer_columns" on public.footer_columns for all using (public.is_admin()) with check (public.is_admin());
 
+drop policy if exists "public_read_footer_links" on public.footer_links;
+drop policy if exists "admin_write_footer_links" on public.footer_links;
 create policy "public_read_footer_links" on public.footer_links for select using (true);
 create policy "admin_write_footer_links" on public.footer_links for all using (public.is_admin()) with check (public.is_admin());
 
 -- ============================================================
--- البيانات الافتراضية (تطابق الفوتر الحالي)
+-- البيانات الافتراضية (تطابق الفوتر الحالي) — بدون تكرار عند إعادة التشغيل
 -- ============================================================
-insert into public.footer_columns (title, col_type, display_order) values
+insert into public.footer_columns (title, col_type, display_order)
+select * from (values
   ('عنا', 'about', 1),
   ('روابط سريعة', 'links', 2),
   ('خدماتنا', 'links', 3),
   ('تواصل معنا', 'contact', 4)
-on conflict do nothing;
+) as v(title, col_type, display_order)
+where not exists (select 1 from public.footer_columns);
 
 insert into public.footer_links (column_id, label, url, display_order)
 select c.id, v.label, v.url, v.ord
