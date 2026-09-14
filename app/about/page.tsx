@@ -61,7 +61,7 @@ export default async function AboutPage() {
       </section>
 
       {/* القيم */}
-      <section className="bg-gray-50 py-16 px-4 border-y">
+      <section className="bg-gray-50/70 backdrop-blur-md py-16 px-4 border-y">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">قيمنا ومبادئنا</h2>

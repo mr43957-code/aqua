@@ -71,7 +71,7 @@ export default async function HomePage() {
 
         {/* ===== إحصائيات الإنجازات ===== */}
         {stats.length > 0 && (
-          <section className="bg-white py-12 border-b border-gray-100 shadow-sm">
+          <section className="bg-white/70 backdrop-blur-md py-12 border-b border-gray-100 shadow-sm">
             <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
               {stats.map((stat: any, si: number) => {
                 const Icon = (LucideIcons as any)[stat.icon ?? ''] ?? Award;
@@ -133,7 +133,7 @@ export default async function HomePage() {
 
         {/* ===== المنتجات المميزة ===== */}
         {featuredProds.length > 0 && (
-          <section className="bg-gray-50 py-16 px-4 border-y">
+          <section className="bg-gray-50/70 backdrop-blur-md py-16 px-4 border-y">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">منتجاتنا</span>
@@ -243,7 +243,7 @@ export default async function HomePage() {
 
         {/* ===== آراء العملاء ===== */}
         {testimonials.length > 0 && (
-          <section className="bg-gray-50 py-16 px-4">
+          <section className="bg-gray-50/70 backdrop-blur-md py-16 px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 text-sm font-semibold px-4 py-1.5 rounded-full">عملاؤنا</span>
@@ -322,7 +322,7 @@ export default async function HomePage() {
         {partners.length > 0 && <PartnersMarquee partners={partners} />}
 
         {/* ===== CTA ===== */}
-        <section className="bg-white py-16 px-4 text-center border-t">
+        <section className="bg-white/70 backdrop-blur-md py-16 px-4 text-center border-t">
           <div className="max-w-2xl mx-auto">
             <Reveal variant="zoom">
               <CheckCircle className="w-12 h-12 text-primary-600 mx-auto mb-4" />
