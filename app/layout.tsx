@@ -7,6 +7,7 @@ import GlobalBackground from '@/components/public/GlobalBackground';
 import PageTransition from '@/components/public/PageTransition';
 import JsonLd from '@/components/public/JsonLd';
 import SwRegister from '@/components/public/SwRegister';
+import AnalyticsScripts from '@/components/public/AnalyticsScripts';
 import { getPublicSiteSettings, getActiveTheme, getPageBackgroundByKey } from '@/lib/actions/public-data';
 import { resolveSiteUrl } from '@/lib/site-url';
 
@@ -70,6 +71,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   let siteName = 'أكوا فيجن';
   let siteDescription = '';
   let siteUrl = resolveSiteUrl();
+  let settings: Record<string, string | null> = {};
   try {
     const theme = await getActiveTheme();
     if (theme?.font_family) fontFamily = theme.font_family;
@@ -77,6 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   try {
     const s = await getPublicSiteSettings();
+    settings = s;
     siteName = s.site_name || siteName;
     siteDescription = s.site_description || siteDescription;
     siteUrl = resolveSiteUrl(s.site_url);
@@ -116,6 +119,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body style={{ fontFamily: `'${fontFamily}', sans-serif`, margin: 0 }}>
         <ThemeInjector />
         <GlobalBackground />
+        <AnalyticsScripts settings={settings} />
         <PageTransition>{children}</PageTransition>
         <Toaster richColors position="top-center" />
         <SwRegister />
