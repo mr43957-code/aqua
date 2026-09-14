@@ -1,6 +1,8 @@
 // components/public/GlobalBackground.tsx
-// خلفية الموقع العامة — صورة ثابتة ممتلئة الشاشة بتأثير بلور خلف المحتوى
-// تتحكم بها من لوحة التحكم: إدارة الموقع ← الخلفيات (صفحة "عام")
+// خلفية الموقع العامة — صورة/فيديو ثابتة ممتلئة الشاشة بتأثير بلور
+// تصميم "انسيابي" يظهر من الجانبين: أطراف الصورة ظاهرة بوضوح، والمنتصف فاتح
+// حتى يبقى المحتوى في العمود الأوسط مقروءاً دائماً
+// تتحكم بها من لوحة التحكم: إدارة الموقع ← الخلفيات ← "خلفية عامة"
 import { getPageBackgroundByKey } from '@/lib/actions/public-data';
 
 export default async function GlobalBackground() {
@@ -13,19 +15,18 @@ export default async function GlobalBackground() {
 
   if (!bg || !bg.is_active || !bg.file_path) return null;
 
+  const blurAmount = Math.max(bg.blur_amount ?? 0, 6);
   const filterStyle = [
-    bg.blur_amount ? `blur(${bg.blur_amount}px)` : 'blur(4px)',
+    `blur(${blurAmount}px)`,
     bg.brightness !== 1 ? `brightness(${bg.brightness})` : '',
     bg.contrast !== 1 ? `contrast(${bg.contrast})` : '',
   ]
     .filter(Boolean)
-    .join(' ') || 'blur(4px)';
-
-  const overlayOpacity = bg.overlay_opacity ?? 0.55;
-  const overlayColor = bg.overlay_color ?? '#f8fafc';
+    .join(' ') || `blur(${blurAmount}px)`;
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* الصورة الممهوسة — تمتد خلف كل المحتوى */}
       {bg.file_type === 'video' ? (
         <video
           src={bg.file_path}
@@ -34,7 +35,7 @@ export default async function GlobalBackground() {
           loop
           playsInline
           className="w-full h-full object-cover"
-          style={{ filter: filterStyle }}
+          style={{ filter: filterStyle, transform: 'scale(1.12)' }}
         />
       ) : (
         <div
@@ -45,12 +46,17 @@ export default async function GlobalBackground() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             filter: filterStyle,
+            transform: 'scale(1.12)',
           }}
         />
       )}
+      {/* تدرج شعاعي: الأطراف (اليمين واليسار) تُظهر الصورة، والمنتصف فاتح ومقروء */}
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: overlayColor, opacity: overlayOpacity }}
+        style={{
+          background:
+            'radial-gradient(ellipse 85% 80% at center, rgba(255,255,255,0.93) 0%, rgba(255,255,255,0.62) 55%, rgba(255,255,255,0.22) 100%)',
+        }}
       />
     </div>
   );
