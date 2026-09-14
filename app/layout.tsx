@@ -110,6 +110,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="ar" dir="rtl">
       <head>
+        <meta name="google-site-verification" content="iT_uaGzQ0CXsmwK9BOG30RXbe4M6xNpOH_lJnBpnoR8" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href={fontUrl} rel="stylesheet" />
