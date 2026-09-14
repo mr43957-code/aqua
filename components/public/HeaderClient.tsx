@@ -75,13 +75,13 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
             </button>
           </form>
         ) : (
-          <button onClick={() => setSearchOpen(true)} className="text-gray-500 hover:text-primary-600 transition p-2.5 rounded-xl hover:bg-primary-50" aria-label="بحث">
+          <button onClick={() => setSearchOpen(true)} className="text-gray-500 hover:text-primary-600 transition p-3 rounded-xl hover:bg-primary-50" aria-label="بحث">
             <Search className="w-5 h-5" />
           </button>
         )}
 
         {/* سلة التسوق */}
-        <Link href="/checkout" className="relative p-2.5 rounded-xl hover:bg-primary-50 transition">
+        <Link href="/checkout" className="relative p-3 rounded-xl hover:bg-primary-50 transition">
           <ShoppingCart className="w-5 h-5 text-gray-600" />
           {totalItems > 0 && (
             <span className="absolute -top-0.5 -right-0.5 bg-primary-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center shadow">
@@ -91,13 +91,13 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
         </Link>
 
         {/* تتبع الطلبات */}
-        <Link href="/track" className="hidden md:block text-xs text-gray-500 hover:text-primary-600 transition px-2.5 py-1.5 rounded-xl hover:bg-primary-50">
+        <Link href="/track" className="hidden md:block text-sm text-gray-500 hover:text-primary-600 transition px-2.5 py-1.5 rounded-xl hover:bg-primary-50">
           تتبع طلبي
         </Link>
 
         {/* زر القائمة للموبايل */}
         <button
-          className="lg:hidden p-2.5 rounded-xl hover:bg-primary-50 text-gray-600 transition"
+          className="lg:hidden p-3 rounded-xl hover:bg-primary-50 text-gray-600 transition"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="القائمة"
         >

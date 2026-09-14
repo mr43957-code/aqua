@@ -46,7 +46,7 @@ export default async function Footer() {
               if (col.col_type === 'about') {
                 return (
                   <div key={col.id} className="lg:col-span-1">
-                    <Link href="/" className="flex items-center gap-2 mb-4">
+<Link href="/" className="flex items-center gap-2 mb-4 py-2">
                       {logoUrl ? (
                         <Image src={logoUrl} alt={siteName} width={36} height={36} className="rounded-lg" unoptimized />
                       ) : (
@@ -106,7 +106,7 @@ export default async function Footer() {
                       )}
                       {settings.contact_whatsapp && (
                         <a href={`https://wa.me/${settings.contact_whatsapp}`} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition mt-2">
+                          className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-3 rounded-xl transition mt-2">
                           💬 واتساب الآن
                         </a>
                       )}
@@ -233,7 +233,7 @@ export default async function Footer() {
                   )}
                   {settings.contact_whatsapp && (
                     <a href={`https://wa.me/${settings.contact_whatsapp}`} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition mt-2">
+                      className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-3 rounded-xl transition mt-2">
                       💬 واتساب الآن
                     </a>
                   )}
@@ -254,11 +254,11 @@ export default async function Footer() {
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-gray-500">{copyright}</p>
-          <div className="flex gap-4 text-xs text-gray-500">
-            <Link href="/search" className="hover:text-gray-300 transition">البحث</Link>
-            <Link href="/track" className="hover:text-gray-300 transition">تتبع طلبي</Link>
-            <Link href="/faq" className="hover:text-gray-300 transition">الأسئلة الشائعة</Link>
-            <Link href="/sitemap.xml" className="hover:text-gray-300 transition">Sitemap</Link>
+          <div className="flex gap-4 text-sm text-gray-500">
+            <Link href="/search" className="hover:text-gray-300 transition py-2">البحث</Link>
+            <Link href="/track" className="hover:text-gray-300 transition py-2">تتبع طلبي</Link>
+            <Link href="/faq" className="hover:text-gray-300 transition py-2">الأسئلة الشائعة</Link>
+            <Link href="/sitemap.xml" className="hover:text-gray-300 transition py-2">Sitemap</Link>
           </div>
         </div>
       </div>

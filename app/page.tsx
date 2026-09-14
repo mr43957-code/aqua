@@ -306,7 +306,7 @@ export default async function HomePage() {
               ))}
             </div>
             <div className="text-center mt-6">
-              <Link href="/faq" className="inline-block py-2 px-3 -mx-3 text-primary-600 font-semibold hover:underline text-sm">
+              <Link href="/faq" className="inline-block py-3 px-3 -mx-3 text-primary-600 font-semibold hover:underline text-sm">
                 عرض جميع الأسئلة الشائعة ←
               </Link>
             </div>
