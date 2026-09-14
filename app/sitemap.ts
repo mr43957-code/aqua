@@ -1,9 +1,10 @@
 // app/sitemap.ts
 import { createClient } from '@/lib/supabase/server';
 import type { MetadataRoute } from 'next';
+import { getSiteUrl } from '@/lib/site-url';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com';
+  const baseUrl = await getSiteUrl();
   let services: any[] = [], products: any[] = [], projects: any[] = [], articles: any[] = [];
 
   try {
@@ -30,6 +31,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/quote`,   changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/search`,  changeFrequency: 'monthly', priority: 0.4 },
     { url: `${baseUrl}/track`,   changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${baseUrl}/privacy`, changeFrequency: 'yearly',  priority: 0.2 },
+    { url: `${baseUrl}/terms`,   changeFrequency: 'yearly',  priority: 0.2 },
   ];
 
   return [

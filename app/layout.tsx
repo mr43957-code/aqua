@@ -7,20 +7,51 @@ import GlobalBackground from '@/components/public/GlobalBackground';
 import PageTransition from '@/components/public/PageTransition';
 import JsonLd from '@/components/public/JsonLd';
 import SwRegister from '@/components/public/SwRegister';
-import { getPublicSiteSettings, getActiveTheme } from '@/lib/actions/public-data';
+import { getPublicSiteSettings, getActiveTheme, getPageBackgroundByKey } from '@/lib/actions/public-data';
+import { resolveSiteUrl } from '@/lib/site-url';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const s = await getPublicSiteSettings();
+    const [s, bg] = await Promise.all([
+      getPublicSiteSettings(),
+      getPageBackgroundByKey('global').catch(() => null),
+    ]);
+    const siteUrl = resolveSiteUrl(s.site_url);
+    const siteName = s.site_name || 'أكوا فيجن';
+    const description = s.seo_default_description || '';
+    const title = {
+      default: s.seo_default_title || siteName,
+      template: `%s | ${siteName}`,
+    };
+    const ogBase = {
+      type: 'website' as const,
+      locale: 'ar_EG',
+      url: siteUrl,
+      siteName,
+      title: s.seo_default_title || siteName,
+      description: description || undefined,
+    };
+    const ogImage = s.site_logo_url || (bg?.file_type === 'image' ? bg.file_path : null) || null;
     return {
-      metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'),
-      title: { default: s.seo_default_title || s.site_name || 'أكوا فيجن', template: `%s | ${s.site_name || 'أكوا فيجن'}` },
-      description: s.seo_default_description || '',
-      icons: s.site_favicon_url ? [{ url: s.site_favicon_url }] : undefined,
-      openGraph: { type: 'website', locale: 'ar_EG', siteName: s.site_name || 'أكوا فيجن' },
+      metadataBase: new URL(siteUrl),
+      title,
+      description,
+      icons: { icon: [{ url: s.site_favicon_url || '/icon.svg' }] },
+      openGraph: ogImage ? { ...ogBase, images: [{ url: ogImage, alt: siteName }] } : ogBase,
+      twitter: {
+        card: 'summary_large_image',
+        title: s.seo_default_title || siteName,
+        description: description || undefined,
+        images: ogImage ? [ogImage] : undefined,
+      },
     };
   } catch {
-    return { title: 'أكوا فيجن', description: 'متخصصون في حمامات السباحة وشبكات المياه' };
+    return {
+      metadataBase: new URL(resolveSiteUrl()),
+      title: 'أكوا فيجن',
+      description: 'متخصصون في حمامات السباحة وشبكات المياه',
+      icons: { icon: [{ url: '/icon.svg' }] },
+    };
   }
 }
 
@@ -38,7 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   let fontFamily = 'Cairo';
   let siteName = 'أكوا فيجن';
   let siteDescription = '';
-  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com';
+  let siteUrl = resolveSiteUrl();
   try {
     const theme = await getActiveTheme();
     if (theme?.font_family) fontFamily = theme.font_family;
@@ -48,7 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     const s = await getPublicSiteSettings();
     siteName = s.site_name || siteName;
     siteDescription = s.site_description || siteDescription;
-    if (s.site_url) siteUrl = s.site_url;
+    siteUrl = resolveSiteUrl(s.site_url);
   } catch {}
 
   const fontUrl = buildFontUrl(fontFamily);

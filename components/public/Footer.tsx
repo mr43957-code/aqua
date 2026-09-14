@@ -258,6 +258,8 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
             <Link href="/search" className="hover:text-gray-300 transition py-3">البحث</Link>
             <Link href="/track" className="hover:text-gray-300 transition py-3">تتبع طلبي</Link>
             <Link href="/faq" className="hover:text-gray-300 transition py-3">الأسئلة الشائعة</Link>
+            <Link href="/privacy" className="hover:text-gray-300 transition py-3">سياسة الخصوصية</Link>
+            <Link href="/terms" className="hover:text-gray-300 transition py-3">شروط الاستخدام</Link>
             <Link href="/sitemap.xml" className="hover:text-gray-300 transition py-3">Sitemap</Link>
           </div>
         </div>
