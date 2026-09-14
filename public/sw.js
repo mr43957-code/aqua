@@ -1,5 +1,5 @@
 /* Service Worker بسيط — عمل الموقع دون اتصال */
-const CACHE = 'aqua-shell-v1';
+const CACHE = 'aqua-shell-v2';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

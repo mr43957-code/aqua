@@ -19,7 +19,7 @@ export default function PartnersMarquee({ partners }: { partners: Partner[] }) {
   const copies = [...partners, ...partners];
 
   return (
-    <section className="py-12 bg-white/40 backdrop-blur-md border-y border-gray-100/50 overflow-hidden" dir="rtl">
+    <section className="py-12 bg-white/30 backdrop-blur-sm border-y border-gray-100/50 overflow-hidden" dir="rtl">
       <div className="max-w-6xl mx-auto px-4 mb-6">
         <h2 className="text-xl font-bold text-center text-gray-700">شركاؤنا وموردونا</h2>
       </div>
