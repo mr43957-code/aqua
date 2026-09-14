@@ -120,11 +120,11 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
                 <div key={col.id}>
                   <h3 className="text-white font-bold mb-4">{col.title}</h3>
                   {colLinks.length > 0 ? (
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {colLinks.map((l: any) => (
                         <li key={l.id}>
                           <Link href={l.url}
-                            className="text-sm text-gray-400 hover:text-primary-400 transition flex items-center gap-1.5">
+                            className="block py-3 text-sm text-gray-400 hover:text-primary-400 transition flex items-center gap-1.5">
                             <span className="w-1 h-1 bg-primary-600 rounded-full flex-shrink-0" />
                             {l.label}
                           </Link>
@@ -167,7 +167,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
 
               <div>
                 <h3 className="text-white font-bold mb-4">روابط سريعة</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-1">
                   {[
                     { href: '/services', label: 'الخدمات' },
                     { href: '/products', label: 'المتجر' },
@@ -180,7 +180,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
                   ].map((l) => (
                     <li key={l.href}>
                       <Link href={l.href}
-                        className="text-sm text-gray-400 hover:text-primary-400 transition flex items-center gap-1.5">
+                        className="block py-3 text-sm text-gray-400 hover:text-primary-400 transition flex items-center gap-1.5">
                         <span className="w-1 h-1 bg-primary-600 rounded-full flex-shrink-0" />
                         {l.label}
                       </Link>
