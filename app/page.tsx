@@ -72,7 +72,7 @@ export default async function HomePage() {
         {/* ===== إحصائيات الإنجازات ===== */}
         {stats.length > 0 && (
           <section className="bg-white/70 backdrop-blur-md py-12 border-b border-gray-100 shadow-sm">
-            <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
+            <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-8 sm:gap-8 text-center">
               {stats.map((stat: any, si: number) => {
                 const Icon = (LucideIcons as any)[stat.icon ?? ''] ?? Award;
                 return (
@@ -306,7 +306,7 @@ export default async function HomePage() {
               ))}
             </div>
             <div className="text-center mt-6">
-              <Link href="/faq" className="text-primary-600 font-semibold hover:underline text-sm">
+              <Link href="/faq" className="inline-block py-2 px-3 -mx-3 text-primary-600 font-semibold hover:underline text-sm">
                 عرض جميع الأسئلة الشائعة ←
               </Link>
             </div>

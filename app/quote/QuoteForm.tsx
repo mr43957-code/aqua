@@ -32,26 +32,26 @@ function QuoteFormInner({ services }: { services: { id: string; title: string }[
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">الاسم الكامل *</label>
           <input name="name" required placeholder="محمد أحمد"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">رقم الهاتف *</label>
           <input name="phone" required placeholder="01XXXXXXXXX"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
         </div>
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">البريد الإلكتروني</label>
         <input name="email" type="email" placeholder="email@example.com"
-          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
       </div>
 
       {services.length > 0 && !serviceId && (
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">الخدمة المطلوبة</label>
           <select name="service_id"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500">
             <option value="">اختر الخدمة...</option>
             {services.map((s) => <option key={s.id} value={s.id}>{s.title}</option>)}
           </select>
@@ -62,7 +62,7 @@ function QuoteFormInner({ services }: { services: { id: string; title: string }[
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">الميزانية التقريبية</label>
           <select name="budget"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500">
             <option value="">غير محدد</option>
             <option value="أقل من 10,000 ج.م">أقل من 10,000 ج.م</option>
             <option value="10,000 – 50,000 ج.م">10,000 – 50,000 ج.م</option>
@@ -73,7 +73,7 @@ function QuoteFormInner({ services }: { services: { id: string; title: string }[
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">الجدول الزمني</label>
           <select name="timeline"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500">
             <option value="">غير محدد</option>
             <option value="عاجل (خلال أسبوع)">عاجل (خلال أسبوع)</option>
             <option value="خلال شهر">خلال شهر</option>
@@ -86,7 +86,7 @@ function QuoteFormInner({ services }: { services: { id: string; title: string }[
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">تفاصيل المشروع</label>
         <textarea name="details" rows={4} placeholder="اشرح لنا ما تحتاجه بالتفصيل: المساحة، الشكل المطلوب، أي متطلبات خاصة..."
-          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none" />
+          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none" />
       </div>
 
       {state.error && (

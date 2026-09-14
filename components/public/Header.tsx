@@ -46,7 +46,7 @@ export default async function Header() {
       <div className="bg-white/85 backdrop-blur-xl border-b border-gray-100/80 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16 gap-4">
           {/* الشعار */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-primary-700 text-lg flex-shrink-0 group">
+          <Link href="/" className="flex items-center gap-2 font-bold text-primary-700 text-lg flex-shrink-0 group py-2">
             {logoUrl ? (
               <Image
                 src={logoUrl}

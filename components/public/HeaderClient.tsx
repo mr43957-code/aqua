@@ -68,20 +68,20 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="ابحث..."
-              className="border border-gray-200 rounded-xl px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-40 bg-white/80"
+              className="border border-gray-200 rounded-xl px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 w-40 bg-white/80"
             />
             <button type="button" onClick={() => setSearchOpen(false)} className="text-gray-400 hover:text-gray-600 p-1">
               <X className="w-4 h-4" />
             </button>
           </form>
         ) : (
-          <button onClick={() => setSearchOpen(true)} className="text-gray-500 hover:text-primary-600 transition p-2 rounded-xl hover:bg-primary-50" aria-label="بحث">
+          <button onClick={() => setSearchOpen(true)} className="text-gray-500 hover:text-primary-600 transition p-2.5 rounded-xl hover:bg-primary-50" aria-label="بحث">
             <Search className="w-5 h-5" />
           </button>
         )}
 
         {/* سلة التسوق */}
-        <Link href="/checkout" className="relative p-2 rounded-xl hover:bg-primary-50 transition">
+        <Link href="/checkout" className="relative p-2.5 rounded-xl hover:bg-primary-50 transition">
           <ShoppingCart className="w-5 h-5 text-gray-600" />
           {totalItems > 0 && (
             <span className="absolute -top-0.5 -right-0.5 bg-primary-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center shadow">
@@ -97,7 +97,7 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
 
         {/* زر القائمة للموبايل */}
         <button
-          className="lg:hidden p-2 rounded-xl hover:bg-primary-50 text-gray-600 transition"
+          className="lg:hidden p-2.5 rounded-xl hover:bg-primary-50 text-gray-600 transition"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="القائمة"
         >
@@ -114,7 +114,7 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="ابحث في الموقع..."
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
+                className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
               />
               <button type="submit" className="bg-primary-600 text-white px-3.5 py-2 rounded-xl hover:bg-primary-700 transition">
                 <Search className="w-4 h-4" />

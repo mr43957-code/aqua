@@ -26,31 +26,31 @@ export default function ContactForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">الاسم *</label>
           <input name="name" required placeholder="اسمك الكريم"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">الهاتف</label>
           <input name="phone" placeholder="01XXXXXXXXX"
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
         </div>
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">البريد الإلكتروني *</label>
         <input name="email" type="email" required placeholder="email@example.com"
-          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">الموضوع</label>
         <input name="subject" placeholder="موضوع رسالتك"
-          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500" />
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">الرسالة *</label>
         <textarea name="message" required rows={5} placeholder="اكتب رسالتك هنا..."
-          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none" />
+          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none" />
       </div>
 
       {state.error && <p className="text-red-600 text-sm bg-red-50 rounded-xl p-3">{state.error}</p>}
