@@ -44,8 +44,8 @@ export default function PartnersMarquee({ partners }: { partners: Partner[] }) {
                     src={partner.logo_url}
                     alt={partner.name}
                     fill
+                    sizes="128px"
                     className="object-contain"
-                    unoptimized
                   />
                 </div>
               ) : (

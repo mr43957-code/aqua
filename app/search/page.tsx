@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Wrench, Package, FolderOpen, FileText } from 'lucide-react';
 
-export const metadata: Metadata = { alternates: { canonical: '/search' }, title: 'البحث' };
+export const metadata: Metadata = { alternates: { canonical: '/search' }, title: 'البحث', description: 'ابحث في خدمات أكوا فيجن ومنتجاتها ومشاريعها ومقالاتها — نتائج فورية في مكان واحد.' };
 
 export default async function SearchPage({ searchParams }: { searchParams: { q?: string } }) {
   const q = (searchParams.q ?? '').trim();
@@ -30,6 +30,7 @@ export default async function SearchPage({ searchParams }: { searchParams: { q?:
       <Header />
       <Breadcrumbs crumbs={[{ label: 'البحث' }]} />
       <main dir="rtl" className="flex-1 max-w-5xl mx-auto w-full px-4 py-10">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">البحث في الموقع</h1>
         <form action="/search" method="GET" className="flex gap-2 mb-8">
           <div className="flex-1 relative">
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />

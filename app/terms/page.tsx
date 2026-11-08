@@ -6,7 +6,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import Link from 'next/link';
 
-export const metadata: Metadata = { alternates: { canonical: '/terms' }, title: 'شروط الاستخدام' };
+export const metadata: Metadata = { alternates: { canonical: '/terms' }, title: 'شروط الاستخدام', description: 'شروط استخدام موقع أكوا فيجن: قواعد استخدام الموقع والخدمات، حقوق الملكية الفكرية، والمسؤوليات والالتزامات.' };
 
 const sections = [
   {

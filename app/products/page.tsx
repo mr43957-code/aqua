@@ -54,7 +54,7 @@ export default async function ProductsPage({
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sticky top-24">
                 {categories.length > 0 && (
                   <div className="mb-5">
-                    <h3 className="font-bold text-gray-800 mb-3 text-sm">التصنيفات</h3>
+                    <h2 className="font-bold text-gray-800 mb-3 text-sm">التصنيفات</h2>
                     <div className="space-y-1">
                       <a href="/products" className={`block px-3 py-2 rounded-lg text-sm transition ${!searchParams.category ? 'bg-primary-50 text-primary-700 font-medium' : 'text-gray-600 hover:bg-gray-50'}`}>
                         الكل ({products.length})
@@ -70,7 +70,7 @@ export default async function ProductsPage({
                 )}
                 {brands.length > 0 && (
                   <div>
-                    <h3 className="font-bold text-gray-800 mb-3 text-sm">العلامة التجارية</h3>
+                    <h2 className="font-bold text-gray-800 mb-3 text-sm">العلامة التجارية</h2>
                     <div className="space-y-1">
                       {brands.map((b) => (
                         <a key={b.id} href={`/products?brand=${b.id}`}
@@ -104,6 +104,8 @@ export default async function ProductsPage({
             {products.length > 0 && (
               <p className="text-sm text-gray-500 mb-4">{products.length} منتج</p>
             )}
+
+            <h2 className="sr-only">المنتجات</h2>
 
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {products.map((p) => <ProductCard key={p.id} product={p} />)}

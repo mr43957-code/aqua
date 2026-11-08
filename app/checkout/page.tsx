@@ -4,7 +4,7 @@ import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import CheckoutClient from './CheckoutClient';
 
-export const metadata: Metadata = { alternates: { canonical: '/checkout' }, title: 'إتمام الطلب' };
+export const metadata: Metadata = { alternates: { canonical: '/checkout' }, title: 'إتمام الطلب', description: 'أكمل طلبك من متجر أكوا فيجن بأمان: بيانات التوصيل، طريقة الدفع، وتأكيد الطلب في خطوات بسيطة.' };
 
 export default function CheckoutPage() {
   return (
