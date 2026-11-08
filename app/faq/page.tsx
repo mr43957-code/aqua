@@ -6,7 +6,7 @@ import Breadcrumbs from '@/components/public/Breadcrumbs';
 import PageHero from '@/components/public/PageHero';
 import { ChevronDown } from 'lucide-react';
 
-export const metadata: Metadata = { alternates: { canonical: '/faq' }, title: 'الأسئلة الشائعة' };
+export const metadata: Metadata = { alternates: { canonical: '/faq' }, title: 'الأسئلة الشائعة', description: 'إجابات عن أكثر الأسئلة شيوعاً حول إنشاء وصيانة حمامات السباحة، الأسعار، ومدة التنفيذ والضمان.' };
 
 export default async function FaqPage() {
   let faqs: any[] = [];

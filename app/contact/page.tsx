@@ -8,7 +8,7 @@ import JsonLd from '@/components/public/JsonLd';
 import { getContactPageData } from '@/lib/actions/public-data';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 
-export const metadata: Metadata = { alternates: { canonical: '/contact' }, title: 'اتصل بنا' };
+export const metadata: Metadata = { alternates: { canonical: '/contact' }, title: 'اتصل بنا', description: 'تواصل مع أكوا فيجن لاستفساراتك — هاتف، واتساب، بريد إلكتروني، ونموذج رسالة، ونحن نرد سريعاً.' };
 
 export default async function ContactPage() {
   let settings: Record<string, string> = {};

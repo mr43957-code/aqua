@@ -9,7 +9,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import { Wrench } from 'lucide-react';
 
-export const metadata: Metadata = { alternates: { canonical: '/services' }, title: 'خدماتنا' };
+export const metadata: Metadata = { alternates: { canonical: '/services' }, title: 'خدماتنا', description: 'خدمات إنشاء وتصميم حمامات السباحة، الصيانة الدورية، فلترة وتعقيم المياه، شبكات المياه والصرف، والإضاءة المائية في مصر.' };
 
 export default async function ServicesPage() {
   let services: any[] = [];

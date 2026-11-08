@@ -7,7 +7,7 @@ import PageHero from '@/components/public/PageHero';
 import JsonLd from '@/components/public/JsonLd';
 import { CheckCircle, Target, Eye, Users } from 'lucide-react';
 
-export const metadata: Metadata = { alternates: { canonical: '/about' }, title: 'من نحن' };
+export const metadata: Metadata = { alternates: { canonical: '/about' }, title: 'من نحن', description: 'تعرف على أكوا فيجن — خبراء إنشاء وصيانة حمامات السباحة وشبكات المياه في مصر، بخبرة سنوات وفريق متخصص وأحدث المعدات.' };
 
 export default async function AboutPage() {
   let settings: Record<string, string> = {};

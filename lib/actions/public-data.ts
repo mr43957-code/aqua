@@ -107,7 +107,7 @@ async function fetchHomePageData() {
       supabase.from('testimonials').select('*').eq('is_published', true).order('sort_order').limit(6),
       supabase.from('products').select('id,name,slug,image_url,price,sale_price,currency').eq('is_published', true).eq('is_featured', true).limit(4),
       supabase.from('partners').select('*').eq('is_active', true).order('sort_order').limit(30),
-      supabase.from('site_settings').select('key,value').in('key', ['site_name', 'site_tagline', 'site_description', 'contact_phone', 'contact_whatsapp', 'contact_address']),
+      supabase.from('site_settings').select('key,value').in('key', ['site_name', 'site_tagline', 'site_description', 'site_url', 'contact_phone', 'contact_whatsapp', 'contact_address']),
       supabase.from('faqs').select('id,question,answer').eq('is_published', true).order('sort_order').limit(6),
     ]);
 

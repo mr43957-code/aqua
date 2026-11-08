@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import type { Slider, SliderItem } from '@/types';
 
-export default function HeroSlider({ slider, items }: { slider: Slider; items: SliderItem[] }) {
+export default function HeroSlider({ slider, items, fallbackTitle }: { slider: Slider; items: SliderItem[]; fallbackTitle?: string }) {
   const [index, setIndex] = useState(0);
   const activeItems = items.filter((i) => i.is_active);
 
@@ -88,9 +88,9 @@ export default function HeroSlider({ slider, items }: { slider: Slider; items: S
               {current.subtitle}
             </p>
           )}
-          {current.title && (
+          {(current.title || fallbackTitle) && (
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-              {current.title}
+              {current.title || fallbackTitle}
             </h1>
           )}
           {current.description && (

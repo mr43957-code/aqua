@@ -13,8 +13,11 @@ import JsonLd from '@/components/public/JsonLd';
 import { Star, MapPin, Wrench, Package, FolderOpen, Award, CheckCircle } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { getHomePageData } from '@/lib/actions/public-data';
+import { resolveSiteUrl } from '@/lib/site-url';
 
 export const revalidate = 60; // ISR: تقدَّم الصفحة من الـ edge كل 60 ثانية بدلاً من كل طلب
+
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 export default async function HomePage() {
   const data = await getHomePageData();
@@ -34,7 +37,7 @@ export default async function HomePage() {
   const heroItems = [...(heroSlider?.slider_items ?? [])].sort((a:any,b:any) => a.sort_order - b.sort_order);
   const bottomItems = [...(bottomSlider?.slider_items ?? [])].sort((a:any,b:any) => a.sort_order - b.sort_order);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com';
+  const siteUrl = resolveSiteUrl(s.site_url);
   const localBusinessLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -58,7 +61,7 @@ export default async function HomePage() {
 
         {/* ===== السلايدر الرئيسي — يظهر مباشرة تحت الهيدر ===== */}
         {heroSlider && heroItems.length > 0 ? (
-          <HeroSlider slider={heroSlider} items={heroItems} />
+          <HeroSlider slider={heroSlider} items={heroItems} fallbackTitle={s.site_name || 'أكوا فيجن'} />
         ) : (
           <section className="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white py-28 px-4 text-center">
             <div className="max-w-4xl mx-auto">

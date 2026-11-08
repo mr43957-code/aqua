@@ -8,7 +8,7 @@ import ProductCard from '@/components/public/ProductCard';
 import JsonLd from '@/components/public/JsonLd';
 import { Package } from 'lucide-react';
 
-export const metadata: Metadata = { alternates: { canonical: '/products' }, title: 'متجر مستلزمات حمامات السباحة' };
+export const metadata: Metadata = { alternates: { canonical: '/products' }, title: 'متجر مستلزمات حمامات السباحة', description: 'تسوق مستلزمات حمامات السباحة: فلاتر، مضخات، كيماويات، إضاءة، وأدوات تنظيف بأفضل الأسعار مع توصيل سريع في مصر.' };
 
 export default async function ProductsPage({
   searchParams,
