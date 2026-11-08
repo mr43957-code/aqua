@@ -52,6 +52,8 @@ export default async function ProjectsPage({ searchParams }: { searchParams: { s
           </div>
         )}
 
+        <h2 className="sr-only">مشاريعنا</h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
             <Link key={p.id} href={`/projects/${p.slug}`}

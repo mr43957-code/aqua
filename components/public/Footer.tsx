@@ -75,7 +75,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
               if (col.col_type === 'contact') {
                 return (
                   <div key={col.id}>
-                    <h3 className="text-white font-bold mb-4">{col.title}</h3>
+                    <h2 className="text-white font-bold mb-4">{col.title}</h2>
                     <div className="space-y-3 text-sm">
                       {settings.contact_phone && (
                         <a href={`tel:${settings.contact_phone}`}
@@ -118,7 +118,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
               const colLinks = (col.footer_links ?? []).slice(0, 12);
               return (
                 <div key={col.id}>
-                  <h3 className="text-white font-bold mb-4">{col.title}</h3>
+                  <h2 className="text-white font-bold mb-4">{col.title}</h2>
                   {colLinks.length > 0 ? (
                     <ul className="space-y-1">
                       {colLinks.map((l: any) => (
@@ -166,7 +166,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
               </div>
 
               <div>
-                <h3 className="text-white font-bold mb-4">روابط سريعة</h3>
+                <h2 className="text-white font-bold mb-4">روابط سريعة</h2>
                 <ul className="space-y-1">
                   {[
                     { href: '/services', label: 'الخدمات' },
@@ -190,7 +190,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
               </div>
 
               <div>
-                <h3 className="text-white font-bold mb-4">خدماتنا</h3>
+                <h2 className="text-white font-bold mb-4">خدماتنا</h2>
                 <ul className="space-y-2 text-sm text-gray-400">
                   {['إنشاء حمامات السباحة', 'صيانة حمامات السباحة', 'شبكات المياه', 'فلترة المياه', 'الإضاءة المائية', 'التصميم والتنفيذ'].map((item) => (
                     <li key={item} className="flex items-center gap-1.5">
@@ -202,7 +202,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
               </div>
 
               <div>
-                <h3 className="text-white font-bold mb-4">تواصل معنا</h3>
+                <h2 className="text-white font-bold mb-4">تواصل معنا</h2>
                 <div className="space-y-3 text-sm">
                   {settings.contact_phone && (
                     <a href={`tel:${settings.contact_phone}`}
