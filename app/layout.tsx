@@ -37,7 +37,14 @@ export async function generateMetadata(): Promise<Metadata> {
       metadataBase: new URL(siteUrl),
       title,
       description,
-      icons: { icon: [{ url: s.site_favicon_url || '/icon.svg' }] },
+      icons: {
+        icon: [
+          ...(s.site_favicon_url ? [{ url: s.site_favicon_url }] : []),
+          { url: '/icon.svg', type: 'image/svg+xml' },
+          { url: '/favicon.ico', sizes: '32x32' },
+        ],
+        apple: '/apple-icon.png',
+      },
       openGraph: ogImage ? { ...ogBase, images: [{ url: ogImage, alt: siteName }] } : ogBase,
       twitter: {
         card: 'summary_large_image',
@@ -51,7 +58,13 @@ export async function generateMetadata(): Promise<Metadata> {
       metadataBase: new URL(resolveSiteUrl()),
       title: 'أكوا فيجن',
       description: 'متخصصون في حمامات السباحة وشبكات المياه',
-      icons: { icon: [{ url: '/icon.svg' }] },
+      icons: {
+        icon: [
+          { url: '/icon.svg', type: 'image/svg+xml' },
+          { url: '/favicon.ico', sizes: '32x32' },
+        ],
+        apple: '/apple-icon.png',
+      },
     };
   }
 }
