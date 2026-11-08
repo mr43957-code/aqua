@@ -1,16 +1,25 @@
 // components/public/Breadcrumbs.tsx
 import Link from 'next/link';
 import { ChevronLeft, Home } from 'lucide-react';
+import { getSiteUrl } from '@/lib/site-url';
 
 export type Crumb = { label: string; href?: string };
 
-export default function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
+export default async function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
+  // رابط مطلق لعناصر BreadcrumbList (متطلب لدى محركات البحث)
+  const siteUrl = (await getSiteUrl()).replace(/\/$/, '');
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: process.env.NEXT_PUBLIC_SITE_URL || '/' },
-      ...crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 2, name: c.label, item: c.href })),
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteUrl}/` },
+      ...crumbs.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 2,
+        name: c.label,
+        ...(c.href ? { item: `${siteUrl}${c.href}` } : {}),
+      })),
     ],
   };
 

@@ -6,7 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
-import JsonLd from '@/components/public/JsonLd';
 import { ArrowRight } from 'lucide-react';
 
 type Props = { params: { slug: string } };
@@ -55,20 +54,10 @@ export default async function ServiceDetailPage({ params }: Props) {
     image: service.cover_image_url,
     provider: { '@type': 'Organization', name: 'أكوا فيجن' },
   };
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: '/', },
-      { '@type': 'ListItem', position: 2, name: 'الخدمات', item: '/services' },
-      { '@type': 'ListItem', position: 3, name: service.title },
-    ],
-  };
 
   return (
     <PublicLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <JsonLd data={breadcrumbLd} />
       <Breadcrumbs crumbs={[{ label: 'الخدمات', href: '/services' }, { label: service.title }]} />
 
       {/* غلاف الخدمة */}
