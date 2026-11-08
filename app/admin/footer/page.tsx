@@ -1,22 +1,15 @@
 // app/admin/footer/page.tsx
-import { createClient } from '@/lib/supabase/server';
 import TopBar from '@/components/admin/TopBar';
-import FooterManagerClient from './FooterManagerClient';
+import FooterSection from '@/components/admin/sections/FooterSection';
 
 export const dynamic = 'force-dynamic';
 
-export default async function FooterPage() {
-  const supabase = createClient();
-  const { data: columns } = await supabase
-    .from('footer_columns')
-    .select('*, footer_links(*)')
-    .order('display_order');
-
+export default function FooterPage() {
   return (
     <>
       <TopBar title="Footer Manager — إدارة الفوتر" />
       <div className="p-6">
-        <FooterManagerClient columns={columns ?? []} />
+        <FooterSection />
       </div>
     </>
   );

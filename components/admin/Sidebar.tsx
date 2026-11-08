@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { clsx } from 'clsx';
 import {
-  LayoutDashboard, Settings, Palette, Image, Layers, Package,
+  LayoutDashboard, Settings, Package,
   FolderOpen, FileText, ShoppingCart, MessageSquare, FileQuestion,
   Users, Activity, Bell, Globe, ChevronDown, ChevronRight,
-  Menu, X, ImageIcon, Wrench, BarChart3, Star, LayoutTemplate
+  Menu, X, Wrench, BarChart3, Star
 } from 'lucide-react';
 
 interface NavItem {
@@ -17,6 +17,8 @@ interface NavItem {
   label: string;
   icon: React.ElementType;
   badge?: number;
+  /** مسارات إضافية تُبقي العنصر مظللاً (مسارات الأقسام القديمة) */
+  matchPaths?: string[];
   children?: NavItem[];
 }
 
@@ -29,14 +31,21 @@ const navGroups: { title: string; items: NavItem[] }[] = [
     ],
   },
   {
-    title: 'إدارة الموقع',
+    title: 'الموقع',
     items: [
-      { href: '/admin/site-builder', label: 'Site Builder', icon: Globe },
-      { href: '/admin/theme-builder', label: 'Theme Builder', icon: Palette },
-      { href: '/admin/backgrounds', label: 'الخلفيات', icon: ImageIcon },
-      { href: '/admin/footer', label: 'الفوتر', icon: LayoutTemplate },
-      { href: '/admin/slider', label: 'السلايدر', icon: Layers },
-      { href: '/admin/media', label: 'مكتبة الوسائط', icon: Image },
+      {
+        href: '/admin/site',
+        label: 'إدارة الموقع',
+        icon: Globe,
+        matchPaths: [
+          '/admin/site-builder',
+          '/admin/theme-builder',
+          '/admin/backgrounds',
+          '/admin/footer',
+          '/admin/slider',
+          '/admin/media',
+        ],
+      },
     ],
   },
   {
@@ -80,7 +89,12 @@ export default function Sidebar({
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isActive = (href?: string) => href && (pathname === href || pathname.startsWith(href + '/'));
+  const matches = (href: string) => pathname === href || pathname.startsWith(href + '/');
+
+  const isActive = (item: NavItem) => {
+    if (!item.href) return false;
+    return matches(item.href) || (item.matchPaths ?? []).some(matches);
+  };
 
   const SidebarContent = () => (
     <div className={clsx('flex flex-col h-full', collapsed ? 'w-16' : 'w-64')}>
@@ -121,7 +135,7 @@ export default function Sidebar({
                   onClick={() => setMobileOpen(false)}
                   className={clsx(
                     'flex items-center gap-3 px-3 py-2 rounded-xl transition-all text-sm',
-                    isActive(item.href)
+                    isActive(item)
                       ? 'bg-white text-primary-800 font-semibold shadow-md'
                       : 'text-primary-200 hover:bg-white/10 hover:text-white',
                     collapsed && 'justify-center'
@@ -145,7 +159,7 @@ export default function Sidebar({
       {/* Bottom */}
       <div className="px-2 py-3 border-t border-white/10">
         <Link
-          href="/admin/settings"
+          href="/admin/site?tab=site-builder"
           className={clsx(
             'flex items-center gap-3 px-3 py-2 rounded-xl text-primary-200 hover:bg-white/10 hover:text-white transition-all text-sm',
             collapsed && 'justify-center'
