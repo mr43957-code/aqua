@@ -103,7 +103,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           {/* الشريط الجانبي */}
           <div className="space-y-5">
             <div className="bg-primary-600 text-white rounded-2xl p-6 text-center">
-              <h3 className="font-bold text-lg mb-2">احصل على عرض سعر</h3>
+              <h2 className="font-bold text-lg mb-2">احصل على عرض سعر</h2>
               <p className="text-primary-200 text-sm mb-4">تواصل معنا الآن للحصول على استشارة مجانية</p>
               <Link href={`/quote?service=${service.id}`}
                 className="block bg-white text-primary-700 font-bold py-2.5 rounded-xl hover:bg-primary-50 transition text-sm">
@@ -113,7 +113,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {relatedServices.length > 0 && (
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                <h3 className="font-bold text-gray-900 mb-4">خدمات أخرى</h3>
+                <h2 className="font-bold text-gray-900 mb-4">خدمات أخرى</h2>
                 <div className="space-y-3">
                   {relatedServices.map((s) => (
                     <Link key={s.id} href={`/services/${s.slug}`}

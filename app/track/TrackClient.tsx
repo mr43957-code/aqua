@@ -49,7 +49,7 @@ export default function TrackClient() {
           onKeyDown={(e) => e.key === 'Enter' && search()}
           placeholder="رقم الطلب (ORD-...) أو رقم الهاتف..."
           className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-        <button onClick={search} disabled={loading}
+        <button onClick={search} disabled={loading} aria-label="تتبع الطلب"
           className="bg-primary-600 hover:bg-primary-700 text-white px-5 py-3 rounded-xl transition disabled:opacity-60 flex items-center gap-2">
           {loading
             ? <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
