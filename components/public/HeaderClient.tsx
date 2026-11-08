@@ -81,7 +81,7 @@ export default function HeaderClient({ links }: { links: { href: string; label: 
         )}
 
         {/* سلة التسوق */}
-        <Link href="/checkout" className="relative p-3 rounded-xl hover:bg-primary-50 transition">
+        <Link href="/checkout" aria-label="سلة المشتريات" className="relative p-3 rounded-xl hover:bg-primary-50 transition">
           <ShoppingCart className="w-5 h-5 text-gray-600" />
           {totalItems > 0 && (
             <span className="absolute -top-0.5 -right-0.5 bg-primary-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center shadow">

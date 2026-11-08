@@ -37,7 +37,7 @@ export default function FloatingButtons({ whatsapp, phone }: Props) {
           {whatsapp && (
             <a href={`https://wa.me/${whatsapp.replace(/\D/g, '')}`}
               target="_blank" rel="noopener noreferrer"
-              className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition"
+              className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-green-700 transition"
               title="واتساب">
               <MessageCircle className="w-5 h-5" />
             </a>

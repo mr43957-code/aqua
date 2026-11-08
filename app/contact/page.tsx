@@ -62,7 +62,7 @@ export default async function ContactPage() {
 
             {settings.contact_whatsapp && (
               <a href={`https://wa.me/${settings.contact_whatsapp}`} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white rounded-xl p-4 transition mt-4">
+                className="flex items-center gap-3 bg-green-700 hover:bg-green-800 text-white rounded-xl p-4 transition mt-4">
                 <MessageCircle className="w-6 h-6" />
                 <div>
                   <p className="font-bold text-sm">تحدث معنا على واتساب</p>

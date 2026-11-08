@@ -106,7 +106,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
                       )}
                       {settings.contact_whatsapp && (
                         <a href={`https://wa.me/${settings.contact_whatsapp}`} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-3 rounded-xl transition mt-2">
+                          className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-5 py-3 rounded-xl transition mt-2">
                           💬 واتساب الآن
                         </a>
                       )}
@@ -233,7 +233,7 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
                   )}
                   {settings.contact_whatsapp && (
                     <a href={`https://wa.me/${settings.contact_whatsapp}`} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-3 rounded-xl transition mt-2">
+                      className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-5 py-3 rounded-xl transition mt-2">
                       💬 واتساب الآن
                     </a>
                   )}
@@ -253,8 +253,8 @@ className="w-11 h-11 bg-gray-800 hover:bg-gradient-to-br hover:from-primary-600 
       {/* Bottom bar */}
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-gray-500">{copyright}</p>
-          <div className="flex gap-4 text-sm text-gray-500">
+          <p className="text-xs text-gray-400">{copyright}</p>
+          <div className="flex gap-4 text-sm text-gray-400">
             <Link href="/search" className="hover:text-gray-300 transition py-3">البحث</Link>
             <Link href="/track" className="hover:text-gray-300 transition py-3">تتبع طلبي</Link>
             <Link href="/faq" className="hover:text-gray-300 transition py-3">الأسئلة الشائعة</Link>
