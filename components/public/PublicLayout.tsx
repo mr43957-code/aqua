@@ -3,7 +3,6 @@
 import Header from './Header';
 import Footer from './Footer';
 import FloatingButtons from './FloatingButtons';
-import LiveChatWidget from './LiveChatWidget';
 import { getPublicSiteSettings } from '@/lib/actions/public-data';
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -21,7 +20,6 @@ export default async function PublicLayout({ children }: { children: React.React
       <main dir="rtl" className="flex-1">{children}</main>
       <Footer />
       <FloatingButtons phone={phone} whatsapp={whatsapp} />
-      <LiveChatWidget />
     </div>
   );
 }

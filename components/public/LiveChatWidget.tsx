@@ -25,8 +25,15 @@ function formatTime(value: string): string {
   }
 }
 
-export default function LiveChatWidget() {
-  const [open, setOpen] = useState(false);
+export default function LiveChatWidget({
+  open,
+  onClose,
+  onUnreadChange,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onUnreadChange?: (count: number) => void;
+}) {
   const [visitorId, setVisitorId] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -197,31 +204,13 @@ export default function LiveChatWidget() {
   const isClosed = conversation?.status === 'closed';
   const showForm = !conversation;
 
+  // إبلاغ الزر العائم بعدد الردود غير المقروءة
+  useEffect(() => {
+    onUnreadChange?.(unread);
+  }, [unread, onUnreadChange]);
+
   return (
     <>
-      {/* الأيقونة الجانبية الصغيرة — منتصف الحافة اليسرى */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? 'إغلاق المحادثة' : 'فتح المحادثة المباشرة'}
-        aria-expanded={open}
-        className={clsx(
-          'fixed left-0 top-1/2 -translate-y-1/2 z-[55]',
-          'flex flex-col items-center gap-1.5 py-3.5 pl-1.5 pr-2',
-          'rounded-r-2xl bg-primary-600 text-white shadow-lg shadow-primary-900/20',
-          'hover:bg-primary-700 hover:pl-2.5 transition-all duration-200',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-600'
-        )}
-      >
-        {open ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
-        {!open && <span className="text-[9px] font-semibold leading-none">دردشة</span>}
-        {!open && unread > 0 && (
-          <span className="absolute -top-1 right-1 min-w-[16px] h-4 px-1 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center shadow">
-            {unread > 9 ? '9+' : unread}
-          </span>
-        )}
-      </button>
-
       {/* لوحة الشات */}
       {open && (
         <div
@@ -229,9 +218,9 @@ export default function LiveChatWidget() {
           aria-label="المحادثة المباشرة"
           dir="rtl"
           className={clsx(
-            'fixed z-[60] bg-white shadow-2xl shadow-gray-900/20 border border-gray-200 overflow-hidden',
-            'left-3 right-3 bottom-24 rounded-2xl max-h-[75vh]',
-            'sm:left-14 sm:right-auto sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2 sm:w-[370px] sm:max-h-[560px]',
+            'fixed z-[70] bg-white shadow-2xl shadow-gray-900/20 border border-gray-200 overflow-hidden',
+            'left-3 right-3 top-16 bottom-3 rounded-2xl',
+            'sm:left-24 sm:right-auto sm:top-auto sm:bottom-6 sm:w-[370px] sm:h-[min(560px,calc(100vh-3rem))]',
             'animate-fade-in flex flex-col'
           )}
         >
@@ -249,7 +238,7 @@ export default function LiveChatWidget() {
             </div>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={onClose}
               aria-label="إغلاق"
               className="p-1.5 rounded-lg hover:bg-white/15 transition"
             >
