@@ -2,6 +2,8 @@
 import { createClient } from '@/lib/supabase/server';
 import Sidebar from '@/components/admin/Sidebar';
 import { Toaster } from 'sonner';
+import { getLiveChatUnreadCount } from '@/lib/actions/chat';
+import { getInternalUnreadTotal } from '@/lib/actions/internal-chat';
 
 export default async function AdminRootLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient();
@@ -9,12 +11,21 @@ export default async function AdminRootLayout({ children }: { children: React.Re
 
   // Login page renders without the dashboard chrome (handled by its own layout check)
   let siteSettings: { site_name?: string | null; site_logo_url?: string | null } = {};
+  let chatBadges = { live: 0, team: 0 };
   if (user) {
-    const { data } = await supabase
-      .from('site_settings')
-      .select('key, value')
-      .in('key', ['site_name', 'site_logo_url']);
-    siteSettings = (data ?? []).reduce((acc, row) => ({ ...acc, [row.key]: row.value }), {});
+    const [settingsRes, liveUnread, teamUnread] = await Promise.all([
+      supabase
+        .from('site_settings')
+        .select('key, value')
+        .in('key', ['site_name', 'site_logo_url']),
+      getLiveChatUnreadCount(),
+      getInternalUnreadTotal(user.id),
+    ]);
+    siteSettings = (settingsRes.data ?? []).reduce(
+      (acc, row) => ({ ...acc, [row.key]: row.value }),
+      {}
+    );
+    chatBadges = { live: liveUnread, team: teamUnread };
   }
 
   if (!user) {
@@ -29,7 +40,7 @@ export default async function AdminRootLayout({ children }: { children: React.Re
 
   return (
     <div dir="rtl" className="min-h-screen flex bg-gray-50">
-      <Sidebar siteSettings={siteSettings} />
+      <Sidebar siteSettings={siteSettings} chatBadges={chatBadges} />
       <div className="flex-1 flex flex-col min-w-0">{children}</div>
       <Toaster richColors position="top-center" />
     </div>

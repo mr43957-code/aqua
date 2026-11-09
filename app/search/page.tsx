@@ -1,9 +1,7 @@
 // app/search/page.tsx
 import { getSearchPageData } from '@/lib/actions/public-data';
 import type { Metadata } from 'next';
-import Header from '@/components/public/Header';
-import Footer from '@/components/public/Footer';
-import FloatingButtons from '@/components/public/FloatingButtons';
+import PublicLayout from '@/components/public/PublicLayout';
 import Breadcrumbs from '@/components/public/Breadcrumbs';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -26,10 +24,9 @@ export default async function SearchPage({ searchParams }: { searchParams: { q?:
   const total = services.length + products.length + projects.length + articles.length;
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
+    <PublicLayout>
       <Breadcrumbs crumbs={[{ label: 'البحث' }]} />
-      <main dir="rtl" className="flex-1 max-w-5xl mx-auto w-full px-4 py-10">
+      <div dir="rtl" className="max-w-5xl mx-auto w-full px-4 py-10">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">البحث في الموقع</h1>
         <form action="/search" method="GET" className="flex gap-2 mb-8">
           <div className="flex-1 relative">
@@ -145,9 +142,7 @@ export default async function SearchPage({ searchParams }: { searchParams: { q?:
             <p className="text-gray-400">اكتب ما تبحث عنه في الخانة أعلاه</p>
           </div>
         )}
-      </main>
-      <Footer />
-      <FloatingButtons phone="" whatsapp="" />
-    </div>
+      </div>
+    </PublicLayout>
   );
 }

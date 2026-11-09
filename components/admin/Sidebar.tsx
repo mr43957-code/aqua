@@ -3,13 +3,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { clsx } from 'clsx';
+import { getLiveChatUnreadCount } from '@/lib/actions/chat';
+import { getInternalUnreadTotal } from '@/lib/actions/internal-chat';
 import {
   LayoutDashboard, Settings, Package,
   FolderOpen, FileText, ShoppingCart, MessageSquare, FileQuestion,
   Users, Activity, Bell, Globe, ChevronDown, ChevronRight,
-  Menu, X, Wrench, BarChart3, Star
+  Menu, X, Wrench, BarChart3, Star, MessageCircle, MessagesSquare
 } from 'lucide-react';
 
 interface NavItem {
@@ -17,6 +19,8 @@ interface NavItem {
   label: string;
   icon: React.ElementType;
   badge?: number;
+  /** مفتاح شارة ديناميكية تُمرَّر من الـ layout */
+  badgeKey?: 'live' | 'team';
   /** مسارات إضافية تُبقي العنصر مظللاً (مسارات الأقسام القديمة) */
   matchPaths?: string[];
   children?: NavItem[];
@@ -70,6 +74,13 @@ const navGroups: { title: string; items: NavItem[] }[] = [
     ],
   },
   {
+    title: 'المحادثات',
+    items: [
+      { href: '/admin/live-chat', label: 'شات الزوار', icon: MessageCircle, badgeKey: 'live' },
+      { href: '/admin/team-chat', label: 'شات الفريق', icon: MessagesSquare, badgeKey: 'team' },
+    ],
+  },
+  {
     title: 'النظام',
     items: [
       { href: '/admin/users', label: 'المستخدمون', icon: Users },
@@ -81,13 +92,47 @@ const navGroups: { title: string; items: NavItem[] }[] = [
 export default function Sidebar({
   siteSettings,
   notifications = 0,
+  chatBadges,
 }: {
   siteSettings?: { site_name?: string | null; site_logo_url?: string | null };
   notifications?: number;
+  chatBadges?: { live?: number; team?: number };
 }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // شارات المحادثات — تبدأ بقيم السيرفر ثم تتحدث تلقائياً
+  const [liveBadge, setLiveBadge] = useState(chatBadges?.live ?? 0);
+  const [teamBadge, setTeamBadge] = useState(chatBadges?.team ?? 0);
+
+  useEffect(() => {
+    setLiveBadge(chatBadges?.live ?? 0);
+    setTeamBadge(chatBadges?.team ?? 0);
+  }, [chatBadges?.live, chatBadges?.team]);
+
+  useEffect(() => {
+    let active = true;
+    const tick = async () => {
+      try {
+        const [live, team] = await Promise.all([
+          getLiveChatUnreadCount(),
+          getInternalUnreadTotal(),
+        ]);
+        if (active) {
+          setLiveBadge(live);
+          setTeamBadge(team);
+        }
+      } catch {
+        /* تجاهل أخطاء الشبكة */
+      }
+    };
+    const timer = setInterval(tick, 20000);
+    return () => {
+      active = false;
+      clearInterval(timer);
+    };
+  }, []);
 
   const matches = (href: string) => pathname === href || pathname.startsWith(href + '/');
 
@@ -128,29 +173,38 @@ export default function Sidebar({
               </p>
             )}
             <div className="space-y-0.5">
-              {group.items.map((item) => (
-                <Link
-                  key={item.href ?? item.label}
-                  href={item.href ?? '#'}
-                  onClick={() => setMobileOpen(false)}
-                  className={clsx(
-                    'flex items-center gap-3 px-3 py-2 rounded-xl transition-all text-sm',
-                    isActive(item)
-                      ? 'bg-white text-primary-800 font-semibold shadow-md'
-                      : 'text-primary-200 hover:bg-white/10 hover:text-white',
-                    collapsed && 'justify-center'
-                  )}
-                  title={collapsed ? item.label : undefined}
-                >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
-                  {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
-                  {!collapsed && item.badge ? (
-                    <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      {item.badge}
-                    </span>
-                  ) : null}
-                </Link>
-              ))}
+              {group.items.map((item) => {
+                const badgeValue =
+                  item.badgeKey === 'live'
+                    ? liveBadge
+                    : item.badgeKey === 'team'
+                      ? teamBadge
+                      : item.badge ?? 0;
+
+                return (
+                  <Link
+                    key={item.href ?? item.label}
+                    href={item.href ?? '#'}
+                    onClick={() => setMobileOpen(false)}
+                    className={clsx(
+                      'flex items-center gap-3 px-3 py-2 rounded-xl transition-all text-sm',
+                      isActive(item)
+                        ? 'bg-white text-primary-800 font-semibold shadow-md'
+                        : 'text-primary-200 hover:bg-white/10 hover:text-white',
+                      collapsed && 'justify-center'
+                    )}
+                    title={collapsed ? item.label : undefined}
+                  >
+                    <item.icon className="w-5 h-5 flex-shrink-0" />
+                    {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
+                    {!collapsed && badgeValue > 0 ? (
+                      <span className="bg-red-500 text-white text-[10px] rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center">
+                        {badgeValue > 99 ? '99+' : badgeValue}
+                      </span>
+                    ) : null}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         ))}
