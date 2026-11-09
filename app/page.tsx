@@ -8,6 +8,7 @@ import HeroSlider from '@/components/public/HeroSlider';
 import BottomSlider from '@/components/public/BottomSlider';
 import PartnersMarquee, { type Partner } from '@/components/public/PartnersMarquee';
 import FloatingButtons from '@/components/public/FloatingButtons';
+import LiveChatWidget from '@/components/public/LiveChatWidget';
 import Reveal from '@/components/public/Reveal';
 import JsonLd from '@/components/public/JsonLd';
 import { Star, MapPin, Wrench, Package, FolderOpen, Award, CheckCircle } from 'lucide-react';
@@ -377,6 +378,7 @@ export default async function HomePage() {
 
       {/* ===== الأزرار العائمة ===== */}
       <FloatingButtons phone={s.contact_phone ?? ''} whatsapp={s.contact_whatsapp ?? ''} />
+      <LiveChatWidget />
     </div>
   );
 }
