@@ -28,7 +28,13 @@ function isMissingTable(error: DbError): boolean {
 
 function friendlyDbError(error: DbError): string {
   if (isMissingTable(error)) {
-    return 'جداول الشات غير موجودة بعد. نفّذ ملف supabase/migrations/0007_chat.sql في Supabase SQL Editor.';
+    let host = 'غير معروف';
+    try {
+      host = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').host || host;
+    } catch {
+      /* تجاهل */
+    }
+    return `جداول الشات غير موجودة بعد في مشروع Supabase المتصل (${host}). نفّذ ملف supabase/migrations/0007_chat.sql في نفس المشروع من SQL Editor.`;
   }
   // مؤقت للتشخيص: نعرض كود الخطأ الحقيقي
   const code = error?.code ?? 'UNKNOWN';
