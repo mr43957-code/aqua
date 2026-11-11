@@ -16,14 +16,24 @@ const MAX_MESSAGE_LENGTH = 2000;
 type DbError = { code?: string; message?: string } | null;
 
 function isMissingTable(error: DbError): boolean {
-  return error?.code === '42P01';
+  if (!error) return false;
+  if (error.code === '42P01' || error.code === 'PGRST205') return true;
+  const message = (error.message ?? '').toLowerCase();
+  return (
+    message.includes('schema cache') ||
+    message.includes('could not find the table') ||
+    message.includes('does not exist')
+  );
 }
 
 function friendlyDbError(error: DbError): string {
   if (isMissingTable(error)) {
     return 'جداول الشات غير موجودة بعد. نفّذ ملف supabase/migrations/0007_chat.sql في Supabase SQL Editor.';
   }
-  return 'تعذّر إتمام العملية. حاول مرة أخرى.';
+  // مؤقت للتشخيص: نعرض كود الخطأ الحقيقي
+  const code = error?.code ?? 'UNKNOWN';
+  const raw = (error?.message ?? '').trim().slice(0, 180);
+  return `تعذّر إتمام العملية [${code}]${raw ? ` — ${raw}` : ''}`;
 }
 
 function normalizeVisitorId(value: unknown): string | null {
